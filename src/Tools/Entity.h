@@ -6,9 +6,10 @@
 #define RAYTRACING_ENTITY_H
 
 #include "Vector.h"
+#include <iostream>
 
 class Entity {
-private:
+protected:
     Vector _position = Vector(0, 0, 0);
     Vector _rotation = Vector(0, 0, 0);
     Vector _scale = Vector(1, 1, 1);
@@ -48,7 +49,7 @@ public:
         _rotation = val;
     }
 
-    Vector Scale() const {
+    Vector scale() const {
         return _scale;
     }
 
@@ -56,5 +57,7 @@ public:
         _scale = val;
     }
 };
+
+std::ostream &operator<<(std::ostream &os, const Entity &v);
 
 #endif //RAYTRACING_ENTITY_H
