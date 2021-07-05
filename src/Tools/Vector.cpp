@@ -14,6 +14,8 @@ Vector Vector::normalized() const {
     return {this->m_x / magnitude, this->m_x / magnitude, this->m_x / magnitude};
 }
 
-Vector Vector::operator=(const Point &p) {
-    return Vector(p.m_x, p.m_y, p.m_z);
+Vector& Vector::operator=(const Point &p) {
+    this->m_x = p.X();
+    this->m_y = p.Y();
+    this->m_z = p.Z();
 }
