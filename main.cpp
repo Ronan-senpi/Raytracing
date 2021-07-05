@@ -1,6 +1,7 @@
 #include <iostream>
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
+#include "src/Tools/Ray.h"
 
 int main() {
     std::cout << "===============Start : Vector===============" << std::endl;
@@ -19,6 +20,9 @@ int main() {
     result = v / calcul;
     std::cout << result << std::endl;
     std::cout << "===============End : Vector===============" << std::endl;
+    std::cout << "===============Start : Ray===============" << std::endl;
+    Ray ray(1, 2, 3, 4, 5, 6);
+    std::cout << ray << std::endl;
     std::cout << "===============Start : Entity===============" << std::endl;
     Entity e;
     std::cout << v << std::endl;
@@ -32,5 +36,6 @@ int main() {
     e.rotate(v);
     std::cout << e << std::endl;
     std::cout << "===============End : Entity===============" << std::endl;
+
 
 }
