@@ -12,7 +12,7 @@ private:
 
 public:
 
-    Vector(float x, float y, float z): m_x(x), m_y(y), m_z(z);
+    Vector(float x, float y, float z): m_x(x), m_y(y), m_z(z){}
 
     float norm();
     Vector normalized();

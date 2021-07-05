@@ -3,8 +3,3 @@
 //
 
 #include "Vector.h"
-
-float Vector::norm()
-{
-
-}
