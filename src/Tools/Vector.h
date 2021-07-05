@@ -4,7 +4,7 @@
 
 #ifndef RAYTRACING_VECTOR_H
 #define RAYTRACING_VECTOR_H
-
+#include <iostream>
 
 class Vector {
 private:
@@ -12,23 +12,21 @@ private:
 
 public:
 
-    Vector(float x, float y, float z) : m_x(x), m_y(y), m_z(z) {}
+    Vector(float x, float y, float z): m_x(x), m_y(y), m_z(z){}
+    Vector(const Vector& v);
 
-    float norm();
+    float norm() const;
+    Vector normalized() const;
+    float dot(const Vector& v) const;
 
-    Vector normalized();
+    float operator[](int i) const;
+    Vector operator+(const Vector& v) const;
+    Vector operator-(Vector& v);
+    Vector operator-() const;
+    Vector operator*(float factor) const;
+    Vector operator/(float divide) const;
+    
 
-    float dot(Vector v);
-
-    float operator[](const int i) const;
-
-    Vector operator+(Vector v);
-
-    Vector operator-(Vector v);
-
-    Vector operator*(int factor);
-
-    Vector operator/(int divide);
 
     float X() const {
         return m_x;
@@ -55,5 +53,6 @@ public:
     }
 };
 
+std::ostream& operator<<(std::ostream& os, const Vector& v);
 
 #endif //RAYTRACING_VECTOR_H
