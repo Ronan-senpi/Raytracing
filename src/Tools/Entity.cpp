@@ -5,7 +5,7 @@
 #include "Entity.h"
 
 void Entity::translate(const Vector transVec) {
-    _position + transVec;
+    _position = _position + transVec;
 }
 
 void Entity::rotateX(const float deg) {
@@ -21,9 +21,13 @@ void Entity::rotateZ(const float deg) {
 }
 
 void Entity::scale(const float factor) {
-    _scale * factor;
+    _scale = _scale * factor;
 }
 
 void Entity::rotate(const Vector deg) {
-    _rotation + deg;
+    _rotation = _rotation + deg;
+}
+
+std::ostream &operator<<(std::ostream &os, const Entity &e) {
+    return os << "position : " << e.position() << " | Rotation : " << e.rotation() << " | Scale : " << e.scale();
 }
