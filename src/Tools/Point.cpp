@@ -1,0 +1,47 @@
+//
+// Created by Aedrinios on 05/07/2021.
+//
+
+#include "Point.h"
+
+float Point::dot(const Point &p) const {
+    return this->m_x * p.m_x + this->m_y * p.m_y + this->m_z * p.m_z;
+}
+
+float Point::operator[](const int i) const {
+    if (i == 0)
+        return this->m_x;
+
+    if (i == 1)
+        return this->m_y;
+
+    if (i == 2)
+        return this->m_z;
+    else
+        throw "out of range";
+}
+
+Point Point::operator+(const Point &p) const {
+    return {this->m_x + p.m_x, this->m_y + p.m_y, this->m_z + p.m_z};
+}
+
+Point Point::operator-(Point &p) {
+    return (*this) + (-p);
+}
+
+Point Point::operator-() const {
+    return {-this->m_x, -this->m_y, -this->m_z};
+}
+
+Point Point::operator*(const float factor) const {
+    return {this->m_x * factor, this->m_y * factor, this->m_z * factor};
+}
+
+Point Point::operator/(float divide) const {
+    return {this->m_x / divide, this->m_y / divide, this->m_z / divide};
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& p)
+{
+    return os << "(" << p[0] << ", " << p[1] << ", " << p[2] << ")";
+}

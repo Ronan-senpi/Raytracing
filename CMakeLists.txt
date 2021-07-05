@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(RayTracing main.cpp
         src/Tools/Vector.h
-        src/Tools/Vector.cpp)
+        src/Tools/Vector.cpp
+        src/Tools/Point.cpp
+        src/Tools/Point.h)
