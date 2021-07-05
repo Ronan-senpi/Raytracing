@@ -8,6 +8,8 @@
 #include <iostream>
 #include "Point.h"
 
+class Vector {
+
 class Vector : public Point {
 public:
     Vector(float x, float y, float z) : Point(x, y, z) {}
@@ -17,14 +19,32 @@ public:
 
     Vector normalized() const;
 
+
     Vector operator=(const Point& p)
-//    float dot(const Vector &v) const;
-//    float operator[](int i) const;
-//    Vector operator+(const Vector &v) const;
-//    Vector operator-(Vector &v);
-//    Vector operator-() const;
-//    Vector operator*(float factor) const;
-//    Vector operator/(float divide) const;
+  
+    float X() const {
+        return m_x;
+    }
+
+    void X(float val) {
+        m_x = val;
+    }
+
+    float Y() const {
+        return m_y;
+    }
+
+    void Y(float val) {
+        m_y = val;
+    }
+
+    float Z() const {
+        return m_z;
+    }
+
+    void Z(float val) {
+        m_z = val;
+    }
 };
 
 std::ostream &operator<<(std::ostream &os, const Vector &v);

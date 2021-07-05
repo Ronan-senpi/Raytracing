@@ -8,3 +8,7 @@ add_executable(RayTracing main.cpp
         src/Tools/Vector.cpp
         src/Tools/Point.cpp
         src/Tools/Point.h)
+        src/Tools/Matrix.cpp
+        src/Tools/Matrix.h
+        src/Tools/Entity.cpp
+        src/Tools/Entity.h)
