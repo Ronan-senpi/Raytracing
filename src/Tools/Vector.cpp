@@ -14,8 +14,7 @@ Vector Vector::normalized() const {
     return {this->m_x / magnitude, this->m_x / magnitude, this->m_x / magnitude};
 }
 
-Vector& Vector::operator=(const Point &p) {
-    this->m_x = p.X();
-    this->m_y = p.Y();
-    this->m_z = p.Z();
+std::ostream& operator<<(std::ostream& os, const Vector& v)
+{
+    return os << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
 }

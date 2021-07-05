@@ -16,7 +16,6 @@ public:
 
     float norm() const;
     Vector normalized() const;
-    Vector& operator=(const Point& p);
 };
 
 std::ostream &operator<<(std::ostream &os, const Vector &v);
