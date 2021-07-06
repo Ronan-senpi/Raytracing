@@ -13,5 +13,6 @@ add_executable(RayTracing main.cpp
         src/Tools/Entity.cpp
         src/Tools/Entity.h
         src/Tools/Object.cpp
-        src/Tools/Object.h)
-        src/Tools/Entity.h src/Tools/Ray.cpp src/Tools/Ray.h)
+        src/Tools/Object.h
+        src/Tools/Ray.cpp
+        src/Tools/Ray.h)
