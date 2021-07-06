@@ -8,7 +8,6 @@
 #include "Entity.h"
 
 class Object : public Entity {
-public:
     
 };
 

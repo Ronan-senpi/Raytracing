@@ -22,7 +22,7 @@ public:
 
     Point operator+(const Point &p) const;
 
-    Point operator-(Point &p);
+    Point operator-(const Point &p) const;
 
     Point operator-() const;
 

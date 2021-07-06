@@ -18,14 +18,14 @@ float Point::operator[](const int i) const {
     if (i == 2)
         return this->m_z;
     else
-        throw "out of range";
+        throw std::out_of_range("0, 1 or 2");
 }
 
 Point Point::operator+(const Point &p) const {
     return {this->m_x + p.m_x, this->m_y + p.m_y, this->m_z + p.m_z};
 }
 
-Point Point::operator-(Point &p) {
+Point Point::operator-(const Point &p) const {
     return (*this) + (-p);
 }
 
