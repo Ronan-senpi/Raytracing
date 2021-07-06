@@ -20,4 +20,4 @@ add_executable(RayTracing main.cpp
         src/Tools/Scene.cpp
         src/Tools/Scene.h
         src/Tools/Color.cpp
-        src/Tools/Color.h)
+        src/Tools/Color.h src/Tools/Light.cpp src/Tools/Light.h)
