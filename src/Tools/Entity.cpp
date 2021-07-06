@@ -28,6 +28,36 @@ void Entity::rotate(const Vector deg) {
     _rotation = _rotation + deg;
 }
 
+Ray Entity::localToGlobal(const Ray &r) const {
+    return {localToGlobal(r.Origin()), localToGlobal(r.Direction())};
+}
+
+Ray Entity::globalToLocal(const Ray &r) const {
+    return {globalToLocal(r.Origin()), globalToLocal(r.Direction())};
+}
+
+Point Entity::localToGlobal(const Point &p) const {
+    //return _tans.inverse() * p;
+    return  Point(0,0,0);
+}
+
+Vector Entity::localToGlobal(const Vector &v) const {
+    //return _tans.inverse() * v;
+
+    return Vector(0, 0, 0);
+}
+
+Point Entity::globalToLocal(const Point &p) const {
+
+    //return _tans * p;
+    return Point(0, 0, 0);
+}
+
+Vector Entity::globalToLocal(const Vector &v) const {
+    //return _tans * v;
+    return Vector(0, 0, 0);
+}
+
 std::ostream &operator<<(std::ostream &os, const Entity &e) {
     return os << "position : " << e.position() << " | Rotation : " << e.rotation() << " | Scale : " << e.scale();
 }

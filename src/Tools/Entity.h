@@ -6,18 +6,21 @@
 #define RAYTRACING_ENTITY_H
 
 #include "Vector.h"
+#include "Ray.h"
+#include "Matrix.h"
 #include <iostream>
 
 class Entity {
 protected:
-    Vector _position = Vector(0, 0, 0);
+    Point _position = Vector(0, 0, 0);
     Vector _rotation = Vector(0, 0, 0);
     Vector _scale = Vector(1, 1, 1);
+    Matrix _tans;
 public:
 
     Entity() = default;
 
-    Entity(Vector pos, Vector rot, Vector sca) : _position(pos), _rotation(rot), _scale(sca) {}
+    Entity(Point pos, Vector rot, Vector sca) : _position(pos), _rotation(rot), _scale(sca) {}
 
     ~Entity() = default;
 
@@ -32,6 +35,17 @@ public:
     void rotate(Vector deg); // effectue une rotation sur tous les axes, de de radians
 
     void scale(float factor); // effectue un redimensionnement de facteur factor
+
+    Point localToGlobal(const Point& p) const;
+    Vector localToGlobal(const Vector& v) const;
+    Ray localToGlobal(const Ray& r) const;
+
+    Point globalToLocal(const Point& p) const;
+    Vector globalToLocal(const Vector& v) const;
+    Ray globalToLocal(const Ray& r) const;
+
+
+
 
     Vector position() const {
         return _position;

@@ -2,14 +2,20 @@
 //// Created by rdher on 05/07/2021.
 ////
 //
-//#ifndef RAYTRACING_MATRIX_H
-//#define RAYTRACING_MATRIX_H
+#ifndef RAYTRACING_MATRIX_H
+#define RAYTRACING_MATRIX_H
 //
 //#include <array>
 //#include <vector>
 //
 ////Matrix 4x4
-//class Matrix {
+class Matrix {
+public:
+    Matrix inverse() const{
+        return  Matrix();
+    }
+
+};
 //private:
 //    std::array<float, 4 * 4> m{};
 //
@@ -31,4 +37,4 @@
 //};
 //
 //
-//#endif //RAYTRACING_MATRIX_H
+#endif //RAYTRACING_MATRIX_H
