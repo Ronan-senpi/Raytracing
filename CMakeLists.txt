@@ -12,8 +12,18 @@ add_executable(RayTracing main.cpp
         src/Tools/Matrix.h
         src/Tools/Entity.cpp
         src/Tools/Entity.h
-        src/Tools/Object.cpp
-        src/Tools/Object.h
+        src/Tools/Objects/Object.cpp
+        src/Tools/Objects/Object.h
+        src/Tools/Objects/Plan.cpp
+        src/Tools/Objects/Plan.h
+        src/Tools/Objects/Sphere.cpp
+        src/Tools/Objects/Sphere.h
+        src/Tools/Objects/Cube.cpp
+        src/Tools/Objects/Cube.h
+        src/Tools/Objects/Square.cpp
+        src/Tools/Objects/Square.h
+        src/Tools/Objects/Cylinder.cpp
+        src/Tools/Objects/Cylinder.h
         src/Tools/Ray.cpp
         src/Tools/Ray.h
         src/Tools/Scene.cpp

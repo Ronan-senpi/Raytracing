@@ -7,7 +7,7 @@
 #include <vector>
 #include "Color.h"
 #include "Light.h"
-#include "Object.h"
+#include "Objects/Object.h"
 
 class Scene {
 private:
