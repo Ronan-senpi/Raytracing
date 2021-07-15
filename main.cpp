@@ -36,6 +36,10 @@ int main() {
     e.rotate(v);
     std::cout << e << std::endl;
     std::cout << "===============End : Entity===============" << std::endl;
-
-
+    std::cout << "===============Start : Matrix===============" << std::endl;
+    std::array<float, 16> tab {1,0,2,4,0,1,3,2,2,-1,0,3,4,-1,3,9};
+    Matrix matrix(tab);
+    std::cout << matrix <<std::endl;
+    Matrix inv = matrix.inverse();
+    std::cout << inv <<std::endl;
 }

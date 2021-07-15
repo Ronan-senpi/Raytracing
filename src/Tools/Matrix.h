@@ -7,6 +7,8 @@
 
 //
 #include <array>
+#include "Point.h"
+
 //
 ////Matrix 4x4
 class Matrix {
@@ -18,14 +20,11 @@ private:
 public:
 
     Matrix();
-
     Matrix(const Matrix &mat);
-
+    Matrix(std::array<float, 16> tab);
     ~Matrix() = default;
 
-    float determinant();
-
-    Matrix adjugate();
+    std::array<float, 16> getMatrix() const;
 
     Matrix inverse() const;
 
@@ -33,7 +32,13 @@ public:
 
     float &operator()(int i, int j);
 
+    Matrix operator*(Matrix mult);
+    Matrix operator*(Point p);
+    Matrix operator+(Point p);
 };
+
+std::ostream &operator<<(std::ostream &os, const Matrix &matrix);
+
 
 
 #endif //RAYTRACING_MATRIX_H
