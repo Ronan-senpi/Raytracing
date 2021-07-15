@@ -15,9 +15,7 @@ Matrix::Matrix(const Matrix &mat) {
 }
 
 Matrix Matrix::inverse() const {
-    Matrix resultInv;
-
-    return resultInv;
+    return Matrix();
 }
 
 //Matrix Matrix::inverse() const {
@@ -53,7 +51,7 @@ float &Matrix::operator()(const int i, const int j) {
     return m[i * 4 + j];
 }
 
-std::array<float, 16> Matrix::emptyMatrix() {
+std::array<float, 16> Matrix::emptyMatrix() const {
     std::array<float, 4 * 4> a{};
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -105,17 +103,22 @@ Matrix Matrix::adjugate() {
                 ((*this)(0, 2) * (*this)(1, 1) * (*this)(2, 3)) + ((*this)(0, 1) * (*this)(1, 3) * (*this)(2, 2));
 
 
-    // ICI CONNARD
-    adj(1, 0) = -((*this)(1, 0) * (*this)(2, 2) * (*this)(3, 3)) - ((*this)(1, 2) * (*this)(2, 3) * (*this)(3, 0)) -
-                ((*this)(1, 3) * (*this)(2, 1) * (*this)(3, 2)) + ((*this)(1, 3) * (*this)(2, 2) * (*this)(3, 1)) +
-                ((*this)(1, 2) * (*this)(2, 1) * (*this)(3, 3)) + ((*this)(1, 1) * (*this)(2, 3) * (*this)(3, 2));
+    adj(1, 0) = ((*this)(0, 1) * (*this)(2, 2) * (*this)(3, 3)) + ((*this)(0, 2) * (*this)(2, 3) * (*this)(3, 1)) +
+                ((*this)(1, 3) * (*this)(2, 1) * (*this)(3, 2)) - ((*this)(0, 3) * (*this)(2, 2) * (*this)(3, 1)) -
+                ((*this)(0, 2) * (*this)(2, 1) * (*this)(3, 3)) - ((*this)(0, 1) * (*this)(2, 3) * (*this)(3, 2));
 
-    adj(1, 1) = ((*this)(1, 1) * (*this)(2, 2) * (*this)(3, 3)) + ((*this)(1, 2) * (*this)(2, 3) * (*this)(3, 1)) +
-                ((*this)(1, 3) * (*this)(2, 1) * (*this)(3, 2)) - ((*this)(1, 3) * (*this)(2, 2) * (*this)(3, 1)) -
-                ((*this)(1, 2) * (*this)(2, 1) * (*this)(3, 3)) - ((*this)(1, 1) * (*this)(2, 3) * (*this)(3, 2));
+    adj(1, 1) = ((*this)(0, 0) * (*this)(2, 2) * (*this)(3, 3)) + ((*this)(0, 2) * (*this)(2, 3) * (*this)(3, 0)) +
+                ((*this)(0, 3) * (*this)(2, 0) * (*this)(3, 2)) - ((*this)(0, 3) * (*this)(2, 2) * (*this)(3, 0)) -
+                ((*this)(0, 2) * (*this)(2, 0) * (*this)(3, 3)) - ((*this)(0, 0) * (*this)(2, 3) * (*this)(3, 2));
 
-    adj(1, 2) = ((*this)(1, 1) * (*this)(2, 2) * (*this)(3, 3)) + ((*this)(1, 2) * (*this)(2, 3) * (*this)(3, 1)) +
-                ((*this)(1, 3) * (*this)(2, 1) * (*this)(3, 2)) - ((*this)(1, 3) * (*this)(2, 2) * (*this)(3, 1)) -
+
+
+
+
+
+
+    adj(1, 2) = ((*this)(0, 0) * (*this)(2, 1) * (*this)(3, 3)) + ((*this)(0, 1) * (*this)(2, 3) * (*this)(3, 0)) +
+                ((*this)(0, 3) * (*this)(2, 0) * (*this)(3, 2)) - ((*this)(1, 3) * (*this)(2, 2) * (*this)(3, 1)) -
                 ((*this)(1, 2) * (*this)(2, 1) * (*this)(3, 3)) - ((*this)(1, 1) * (*this)(2, 3) * (*this)(3, 2));
 
     adj(1, 3) = ((*this)(1, 1) * (*this)(2, 2) * (*this)(3, 3)) + ((*this)(1, 2) * (*this)(2, 3) * (*this)(3, 1)) +
