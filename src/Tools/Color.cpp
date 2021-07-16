@@ -6,7 +6,11 @@
 #include <stdexcept>
 
 Color Color::operator*(const Color c) const {
-    return Color(r*c.r, g*c.g, b*c.g);
+    return Color(r * c.r, g * c.g, b * c.g);
+}
+
+Color Color::operator+(Color c) const {
+    return Color(r + c.r, g + c.g, b + c.g);
 }
 
 float Color::operator[](const int i) const {
@@ -21,3 +25,4 @@ float Color::operator[](const int i) const {
     else
         throw std::out_of_range("0, 1 or 2");
 }
+

@@ -4,6 +4,7 @@
 
 #ifndef RAYTRACING_SCENE_H
 #define RAYTRACING_SCENE_H
+
 #include <vector>
 #include "Color.h"
 #include "Light.h"
@@ -23,27 +24,39 @@ public:
      * @param impact met a jour ce point avec le point d'impact
      * @return
      */
-    Object* closer_intersected(const Ray& ray, Point& impact)const;
+    Object *closer_intersected(const Ray &ray, Point &impact) const;
+
     /**
      * Retourne la couleur d'arrière plan.
      * @return color
      */
-    Color getBackground() const{
+    Color getBackground() const {
         return bgColor;
     }
+
     /**
      * Retourne la valeur de lumière ambiante.
      * @return Color
      */
-    Color getAmbiant() const{
-        return  ambiantColor;
+    Color getAmbiant() const {
+        return ambiantColor;
     }
+
     /**
      * Retourne le nombre de lumières dans la scène.
      * @return int
      */
-    int nbLights() const{
-        return  lights.size();
+    int nbLights() const {
+        return lights.size();
+    }
+
+    /**
+     *
+     * @param i
+     * @return
+     */
+    Light getLight(int i) const {
+        return lights[i];
     }
 
 };

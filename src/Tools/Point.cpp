@@ -25,6 +25,10 @@ Point Point::operator+(const Point &p) const {
     return {this->m_x + p.m_x, this->m_y + p.m_y, this->m_z + p.m_z};
 }
 
+Point Point::operator*(const Point &p) const {
+    return {this->m_x * p.m_x, this->m_y * p.m_y, this->m_z * p.m_z};
+}
+
 Point Point::operator-(const Point &p) const {
     return (*this) + (-p);
 }
@@ -41,7 +45,7 @@ Point Point::operator/(float divide) const {
     return {this->m_x / divide, this->m_y / divide, this->m_z / divide};
 }
 
-std::ostream& operator<<(std::ostream& os, const Point& p)
-{
+
+std::ostream &operator<<(std::ostream &os, const Point &p) {
     return os << "(" << p[0] << ", " << p[1] << ", " << p[2] << ")";
 }
