@@ -6,6 +6,10 @@
 #define RAYTRACING_MATERIAL_H
 
 #include "Color.h"
+#include "Ray.h"
+#include "Objects/Object.h"
+#include "Point.h"
+#include "Scene.h"
 
 class Material {
 private:
@@ -19,6 +23,8 @@ public:
     float Shininess() const {
         return shininess;
     }
+
+    Color getImpactColor(const Ray &ray, const Object &obj, const Point &impact, const Scene &scene) const;
 
     void Ka(const Color c) {
         ka = c;
