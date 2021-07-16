@@ -9,7 +9,7 @@
 
 class Plan : public Object {
 public:
-    bool intersect(const Ray &ray, Point &impact) const override
+    bool intersect(const Ray &ray, Point &impact) const override;
 };
 
 

@@ -3,7 +3,7 @@ project(Raytracing)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(RayTracing main.cpp
+add_executable(Raytracing main.cpp
         src/Tools/Vector.h
         src/Tools/Vector.cpp
         src/Tools/Point.cpp
@@ -34,3 +34,6 @@ add_executable(RayTracing main.cpp
         src/Tools/Light.h
         src/Tools/Material.cpp
         src/Tools/Material.h)
+
+target_include_directories(Raytracing PRIVATE
+        "Libraries/opencv/build/include")
