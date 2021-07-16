@@ -6,6 +6,7 @@
 #define RAYTRACING_SQUARE_H
 
 #include "Plan.h"
+#include "../Point.h"
 
 class Square : public Plan {
     bool intersect(const Ray &ray, Point &impact) const override;

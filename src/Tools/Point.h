@@ -12,8 +12,10 @@ protected:
     float m_x, m_y, m_z;
 
 public:
+    Point() : m_x(0), m_y(0), m_z(0) {}
 
     Point(float x, float y, float z) : m_x(x), m_y(y), m_z(z) {}
+
     Point(const Point &p) : m_x(p.m_x), m_y(p.m_y), m_z(p.m_z) {}
 
     float dot(const Point &p) const;
