@@ -13,14 +13,14 @@
 
 class Light : public Entity {
 private:
-    int _id;
+    Color _id;
     Color _is;
 public:
     Light() : Entity() {};
 
-    Light(int i, Point pos, Vector rot, Vector sca) : _id(i), Entity(pos, rot, sca) {};
+    Light(Color i, Point pos, Vector rot, Vector sca) : _is(i), Entity(pos, rot, sca) {};
 
-    int id() const {
+    Color id() const {
         return _id;
     }
 

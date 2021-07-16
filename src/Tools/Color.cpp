@@ -26,3 +26,7 @@ float Color::operator[](const int i) const {
         throw std::out_of_range("0, 1 or 2");
 }
 
+Color Color::operator*(float factor) const {
+    return Color(r * factor, g * factor, b * factor);
+}
+
