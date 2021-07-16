@@ -13,5 +13,7 @@ public:
 
     Ray getNormal(const Point &p, const Point &o) const override;
 
+};
+
 
 #endif //RAYTRACING_PLAN_H
