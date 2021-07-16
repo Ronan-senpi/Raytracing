@@ -26,9 +26,13 @@ public:
 
     Point operator-(const Point &p) const;
 
+    Point operator*(const Point &p) const;
+
     Point operator-() const;
 
     Point operator*(float factor) const;
+
+    float operator*(Point factor) const;
 
     Point operator/(float divide) const;
 

@@ -11,11 +11,16 @@
 class Vector : public Point {
 public:
 
+    Vector() : Point(0, 0, 0) {};
+
     Vector(float x, float y, float z) : Point(x, y, z) {}
+
     Vector(const Vector &v) : Point(v.m_x, v.m_y, v.m_z) {}
+
     Vector(const Point &p) : Point(p.X(), p.Y(), p.Z()) {}
 
     float norm() const;
+
     Vector normalized() const;
 };
 

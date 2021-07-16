@@ -8,15 +8,21 @@
 
 class Color {
 private:
-    float r,g,b;
+    float r, g, b;
 public:
     Color() = default;
-    Color(const Color& c)= default;
-    Color(float r, float g, float b): r(r), g(g),b(b){}
+
+    Color(const Color &c) = default;
+
+    Color(float r, float g, float b) : r(r), g(g), b(b) {}
+
     ~Color() = default;
 
     float operator[](int i) const;
+
     Color operator*(Color c) const;
+
+    Color operator+(Color c) const;
 
     float R() const {
         return r;
