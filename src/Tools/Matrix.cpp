@@ -180,7 +180,7 @@ Matrix Matrix::operator*(Matrix mult) {
 Matrix Matrix::operator*(float f) {
     std::array<float, 16> arr;
     for(int i = 0; i < 4; i++){
-        arr[i] = m[i] * float;
+        arr[i] = m[i] * f;
     }
     return Matrix(arr);
 }
