@@ -33,8 +33,7 @@ public:
     float &operator()(int i, int j);
 
     Matrix operator*(Matrix mult);
-    Matrix operator*(Point p);
-    Matrix operator+(Point p);
+    Matrix operator*(float f);
 };
 
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix);

@@ -2,6 +2,7 @@
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
 #include "src/Tools/Ray.h"
+#include <opencv2/opencv.hpp>
 
 int main() {
     std::cout << "===============Start : Vector===============" << std::endl;
@@ -42,4 +43,11 @@ int main() {
     std::cout << matrix <<std::endl;
     Matrix inv = matrix.inverse();
     std::cout << inv <<std::endl;
+    std::array<float, 16> tabA {5,7,9,10,2,3,3,8,8,10,2,3,3,3,4,8};
+    std::array<float, 16> tabB {3,10,12,18,12,1,4,9,9,10,12,2,3,12,4,10};
+
+    Matrix a(tabA);
+    Matrix b(tabB);
+    Matrix mult = a * b;
+    std::cout << mult <<std::endl;
 }

@@ -37,7 +37,7 @@ std::array<float, 16> Matrix::emptyMatrix() const {
 }
 
 Matrix Matrix::inverse() const {
-    std::array<float,16> tmp{}, inv{};
+    std::array<float, 16> tmp{}, inv{};
     float det;
     int i;
 
@@ -162,15 +162,33 @@ Matrix Matrix::inverse() const {
     return Matrix(inv);
 }
 
-std::array<float, 16> Matrix::getMatrix() const{
+std::array<float, 16> Matrix::getMatrix() const {
     return m;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix& matrix)
-{
-    std::array<float,16> arr = matrix.getMatrix();
-    for(float i : arr){
-        os<< "(" << i << ")";
+Matrix Matrix::operator*(Matrix mult) {
+    std::array<float, 16> arr;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            arr[i * 4 + j] = m[i * 4] * mult.getMatrix()[j] + m[i * 4 + 1] * mult.getMatrix()[1 * 4 + j] +
+                             m[i * 4 + 2] * mult.getMatrix()[2 * 4 + j] + m[i * 4 + 3] * mult.getMatrix()[3 * 4 + j];
+        }
+    }
+    return Matrix(arr);
+}
+
+Matrix Matrix::operator*(float f) {
+    std::array<float, 16> arr;
+    for(int i = 0; i < 4; i++){
+        arr[i] = m[i] * float;
+    }
+    return Matrix(arr);
+}
+
+std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
+    std::array<float, 16> arr = matrix.getMatrix();
+    for (float i : arr) {
+        os << "(" << i << ")";
     }
     return os << std::endl;
 }
