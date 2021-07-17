@@ -15,7 +15,7 @@ class Matrix {
 private:
 
     std::array<float, 16> m = {};
-    std::array<float, 16> emptyMatrix() const;
+    std::array<float, 16> identiy() const;
 
 public:
 
@@ -28,8 +28,7 @@ public:
 
     Matrix inverse() const;
 
-    float operator()(int i, int j) const;
-
+    float operator()(const int& i, const int& j) const;
     float &operator()(int i, int j);
 
     Matrix operator*(Matrix mult);

@@ -4,6 +4,6 @@
 
 #include "Cylinder.h"
 
-bool Cylinder::intersect(const Ray &ray, Point &impact) const {
+bool Cylinder::intersect(const Ray &ray, Point &impact)  {
     return Object::intersect(ray, impact);
 }

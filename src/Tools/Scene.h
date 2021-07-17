@@ -59,7 +59,7 @@ public:
         return lights[i];
     }
 
-    Color getImpactColor(const Ray &ray, const Object &obj, const Point &impact) const;
+    Color getImpactColor(const Ray &ray, Object &obj, const Point &impact) ;
 
 };
 

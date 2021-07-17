@@ -9,9 +9,9 @@
 
 class Sphere : public Object {
 public:
-    bool intersect(const Ray &ray, Point &impact) const override;
+    bool intersect(const Ray &ray, Point &impact)  override;
 
-    Ray getNormal(const Point &p, const Point &o) const override;
+    Ray getNormal(const Point &p, const Point &o)  override;
 };
 
 
