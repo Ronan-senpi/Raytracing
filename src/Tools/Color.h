@@ -56,6 +56,15 @@ public:
     void B(float val) {
         b = val;
     }
+
+    void A(float val) const {
+
+    }
+
+    float A() const {
+        return 1.f;
+    }
+
 };
 
 

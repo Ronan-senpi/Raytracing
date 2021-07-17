@@ -2,7 +2,9 @@
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
 #include "src/Tools/Ray.h"
-#include <opencv2/opencv.hpp>
+//#include <opencv2/opencv.hpp>
+
+#include "src/Tools/Images/Image.h"
 
 int main() {
     std::cout << "===============Start : Vector===============" << std::endl;
@@ -38,16 +40,18 @@ int main() {
     std::cout << e << std::endl;
     std::cout << "===============End : Entity===============" << std::endl;
     std::cout << "===============Start : Matrix===============" << std::endl;
-    std::array<float, 16> tab {1,0,2,4,0,1,3,2,2,-1,0,3,4,-1,3,9};
+    std::array<float, 16> tab{1, 0, 2, 4, 0, 1, 3, 2, 2, -1, 0, 3, 4, -1, 3, 9};
     Matrix matrix(tab);
-    std::cout << matrix <<std::endl;
+    std::cout << matrix << std::endl;
     Matrix inv = matrix.inverse();
-    std::cout << inv <<std::endl;
-    std::array<float, 16> tabA {5,7,9,10,2,3,3,8,8,10,2,3,3,3,4,8};
-    std::array<float, 16> tabB {3,10,12,18,12,1,4,9,9,10,12,2,3,12,4,10};
+    std::cout << inv << std::endl;
+    std::array<float, 16> tabA{5, 7, 9, 10, 2, 3, 3, 8, 8, 10, 2, 3, 3, 3, 4, 8};
+    std::array<float, 16> tabB{3, 10, 12, 18, 12, 1, 4, 9, 9, 10, 12, 2, 3, 12, 4, 10};
 
     Matrix a(tabA);
     Matrix b(tabB);
     Matrix mult = a * b;
-    std::cout << mult <<std::endl;
+    std::cout << mult << std::endl;
+
+    Image(500, 500, {255, 0, 0}).write("out.png");
 }
