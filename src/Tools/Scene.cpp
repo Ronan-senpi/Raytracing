@@ -8,7 +8,7 @@ Object *Scene::closer_intersected(const Ray &ray, Point &impact) const {
     throw "Implem";
 }
 
-Color Scene::getImpactColor(const Ray &ray, const Object &obj, const Point &impact) const {
+Color Scene::getImpactColor(const Ray &ray, Object &obj, const Point &impact)  {
     Color ambiant = obj.getMaterial(impact).Ka() * (getAmbiant());
     Ray normal = obj.getNormal(impact, ray.Origin());
 

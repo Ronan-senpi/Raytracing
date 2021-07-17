@@ -12,6 +12,6 @@ Material Object::getMaterial(const Point &p) const {
     return Material();
 }
 
-Ray Object::getNormal(const Point &p, const Point &o) const {
+Ray Object::getNormal(const Point &p, const Point &o)  {
     return Ray(0, 0, 0, 0, 0, 0);
 }

@@ -15,7 +15,8 @@ protected:
     Point _position = Vector(0, 0, 0);
     Vector _rotation = Vector(0, 0, 0);
     Vector _scale = Vector(1, 1, 1);
-    Matrix _tans;
+    Matrix _trans;
+    Matrix _transInv;
 public:
 
     Entity() = default;
@@ -36,15 +37,17 @@ public:
 
     void scale(float factor); // effectue un redimensionnement de facteur factor
 
-    Point localToGlobal(const Point& p) const;
-    Vector localToGlobal(const Vector& v) const;
-    Ray localToGlobal(const Ray& r) const;
+    Point localToGlobal(const Point &p);
 
-    Point globalToLocal(const Point& p) const;
-    Vector globalToLocal(const Vector& v) const;
-    Ray globalToLocal(const Ray& r) const;
+    Vector localToGlobal(const Vector &v);
 
+    Ray localToGlobal(const Ray &r);
 
+    Point globalToLocal(const Point &p);
+
+    Vector globalToLocal(const Vector &v);
+
+    Ray globalToLocal(const Ray &r);
 
 
     Vector position() const {

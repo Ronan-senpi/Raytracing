@@ -2,7 +2,6 @@
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
 #include "src/Tools/Ray.h"
-//#include <opencv2/opencv.hpp>
 
 #include "src/Tools/Images/Image.h"
 
@@ -54,4 +53,12 @@ int main() {
     std::cout << mult << std::endl;
 
     Image(500, 500, {255, 0, 0}).write("out.png");
+
+    Matrix multiplyPoint({1,2,5,6,8,0,4,0,6,2,4,7,8,9,2,1});
+    Point pointFoisMat(4,5,9);
+    Vector vecFoisMat(4,5,9);
+    Point resultPointFoisMat = multiplyPoint * pointFoisMat;
+    Vector resultVecFoisMat = multiplyPoint * vecFoisMat;
+    std::cout<< resultPointFoisMat <<std::endl;
+    std::cout<< resultVecFoisMat <<std::endl;
 }

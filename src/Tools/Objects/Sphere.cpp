@@ -5,7 +5,7 @@
 #include "Sphere.h"
 #include "../Vector.h"
 
-bool Sphere::intersect(const Ray &ray, Point &impact) const {
+bool Sphere::intersect(const Ray &ray, Point &impact)  {
     Ray r = globalToLocal(ray);
 
     float a = (r.Direction().X() * r.Direction().X())
@@ -57,7 +57,7 @@ bool Sphere::intersect(const Ray &ray, Point &impact) const {
     return false;
 }
 
-Ray Sphere::getNormal(const Point &p, const Point &o) const {
+Ray Sphere::getNormal(const Point &p, const Point &o)  {
     Point oo = globalToLocal(o);
     Point i = globalToLocal(p);
 

@@ -4,7 +4,7 @@
 
 #include "Cube.h"
 
-bool Cube::intersect(const Ray &ray, Point &impact) const {
+bool Cube::intersect(const Ray &ray, Point &impact)  {
     Ray r = globalToLocal(ray);
     float tmin = (-1 - r.Origin().X()) / r.Direction().X();
     float tmax = (1 - r.Origin().X()) / r.Direction().X();
@@ -48,7 +48,7 @@ bool Cube::intersect(const Ray &ray, Point &impact) const {
     return true;
 }
 
-Ray Cube::getNormal(const Point &p, const Point &o) const {
+Ray Cube::getNormal(const Point &p, const Point &o)  {
     Vector dir(0, 0, 0);
     Point oo = globalToLocal(o);
     Point i = globalToLocal(p);

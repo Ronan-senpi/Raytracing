@@ -4,7 +4,7 @@
 
 #include "Square.h"
 
-bool Square::intersect(const Ray &ray, Point &impact) const {
+bool Square::intersect(const Ray &ray, Point &impact)  {
     Ray lr = globalToLocal(ray);
     float vz = lr.Direction().Z();
     float oz = lr.Origin().Z();

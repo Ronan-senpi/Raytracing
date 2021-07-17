@@ -16,9 +16,9 @@ public:
 
     Material getMaterial(const Point &p) const;
 
-    virtual Ray getNormal(const Point &p, const Point &o) const;
+    virtual Ray getNormal(const Point &p, const Point &o) ;
 
-    virtual bool intersect(const Ray &ray, Point &impact) const { return false; };
+    virtual bool intersect(const Ray &ray, Point &impact)  { return false; };
 };
 
 
