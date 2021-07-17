@@ -9,6 +9,7 @@ void Entity::translate(const Vector transVec) {
     m(0, 3) = transVec.X();
     m(1, 3) = transVec.Y();
     m(2, 3) = transVec.Z();
+    _position = transVec;
     _trans = m * _trans;
     _transInv = _trans.inverse();
 }
@@ -21,6 +22,7 @@ void Entity::rotateX(const float deg) {
     m(1, 2) = -s;
     m(2, 1) = s;
     m(2, 2) = c;
+    _rotation.X(deg);
     _trans = m * _trans;
     _transInv = _trans.inverse();
 }
@@ -33,6 +35,7 @@ void Entity::rotateY(const float deg) {
     m(0, 2) = s;
     m(2, 0) = -s;
     m(2, 2) = c;
+    _rotation.Y(deg);
     _trans = m * _trans;
     _transInv = _trans.inverse();
 }
@@ -45,21 +48,25 @@ void Entity::rotateZ(const float deg) {
     m(0, 1) = -s;
     m(1, 0) = s;
     m(1, 1) = c;
+    _rotation.Z(deg);
     _trans = m * _trans;
     _transInv = _trans.inverse();
 }
 
-void Entity::scale(const float factor) {
+void Entity::scale(const Vector factor) {
     Matrix m;
-    m(0, 0) = factor;
-    m(1, 1) = factor;
-    m(2, 2) = factor;
+    m(0, 0) = factor.X();
+    m(1, 1) = factor.Y();
+    m(2, 2) = factor.Z();
+    _scale = factor;
     _trans = m * _trans;
     _transInv = _trans.inverse();
 }
 
 void Entity::rotate(const Vector deg) {
-    _rotation = _rotation + deg;
+    rotateX(deg.X());
+    rotateY(deg.Y());
+    rotateZ(deg.Z());
 }
 
 Ray Entity::localToGlobal(const Ray &r) {

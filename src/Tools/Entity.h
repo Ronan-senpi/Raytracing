@@ -21,7 +21,12 @@ public:
 
     Entity() = default;
 
-    Entity(Point pos, Vector rot, Vector sca) : _position(pos), _rotation(rot), _scale(sca) {}
+    Entity(Point pos, Vector rot, Vector sca) /*: _position(pos), _rotation(rot), _scale(sca) */{
+        _trans = Matrix();
+        translate(pos);
+        rotate(rot);
+        scale(sca);
+    }
 
     ~Entity() = default;
 
@@ -35,7 +40,7 @@ public:
 
     void rotate(Vector deg); // effectue une rotation sur tous les axes, de de radians
 
-    void scale(float factor); // effectue un redimensionnement de facteur factor
+    void scale(Vector factor); // effectue un redimensionnement de facteur factor
 
     Point localToGlobal(const Point &p);
 
@@ -48,7 +53,6 @@ public:
     Vector globalToLocal(const Vector &v);
 
     Ray globalToLocal(const Ray &r);
-
 
     Vector position() const {
         return _position;
