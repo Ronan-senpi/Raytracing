@@ -45,9 +45,16 @@ int main() {
     std::cout << inv <<std::endl;
     std::array<float, 16> tabA {5,7,9,10,2,3,3,8,8,10,2,3,3,3,4,8};
     std::array<float, 16> tabB {3,10,12,18,12,1,4,9,9,10,12,2,3,12,4,10};
-
     Matrix a(tabA);
     Matrix b(tabB);
     Matrix mult = a * b;
     std::cout << mult <<std::endl;
+    Matrix multiplyPoint({1,2,5,6,8,0,4,0,6,2,4,7,8,9,2,1});
+    Point pointFoisMat(4,5,9);
+    Vector vecFoisMat(4,5,9);
+    Point resultPointFoisMat = multiplyPoint * pointFoisMat;
+    Vector resultVecFoisMat = multiplyPoint * vecFoisMat;
+    std::cout<< resultPointFoisMat <<std::endl;
+    std::cout<< resultVecFoisMat <<std::endl;
+
 }

@@ -32,7 +32,7 @@ public:
 
     Point operator*(float factor) const;
 
-    float operator*(Point factor) const;
+   // float operator*(Point factor) const;
 
     Point operator/(float divide) const;
 

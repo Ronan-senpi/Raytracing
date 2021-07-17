@@ -8,7 +8,7 @@
 //
 #include <array>
 #include "Point.h"
-
+#include "Vector.h"
 //
 ////Matrix 4x4
 class Matrix {
@@ -33,6 +33,8 @@ public:
     float &operator()(int i, int j);
 
     Matrix operator*(Matrix mult);
+    Point operator*(Point p);
+    Vector operator*(Vector p);
     Matrix operator*(float f);
 };
 
