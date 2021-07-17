@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(Raytracing)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Raytracing main.cpp
         src/Tools/Vector.h
@@ -33,7 +33,17 @@ add_executable(Raytracing main.cpp
         src/Tools/Light.cpp
         src/Tools/Light.h
         src/Tools/Material.cpp
-        src/Tools/Material.h)
+        src/Tools/Material.h
+        src/Tools/Images/Image.cpp
+        src/Tools/Images/Image.h
+        src/Tools/Images/ImageType.h
+        src/Tools/Helpers/Debug.cpp
+        src/Tools/Helpers/Debug.h
+        src/Tools/Helpers/FileHelper.cpp
+        src/Tools/Helpers/FileHelper.h
+        src/Tools/Helpers/StringHelpers.cpp
+        src/Tools/Helpers/StringHelpers.h)
 
 target_include_directories(Raytracing PRIVATE
-        "Libraries/opencv/build/include")
+        "Libraries/opencv/build/include"
+        "Libraries/stb")
