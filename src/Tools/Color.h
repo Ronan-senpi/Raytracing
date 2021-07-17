@@ -24,6 +24,15 @@ public:
 
     Color operator+(Color c) const;
 
+    Color operator*(float factor) const;
+
+    Color &operator+=(Color c) {
+        r += c.R();
+        g += c.G();
+        b += c.B();
+        return *this;
+    }
+
     float R() const {
         return r;
     }
