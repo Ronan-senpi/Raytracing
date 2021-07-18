@@ -4,14 +4,10 @@
 
 #include "Object.h"
 
-Point Object::getTextureCoordinates(const Point &p) const {
-    return Point(0, 0, 0);
-}
+//Point Object::getTextureCoordinates(const Point &p) const {
+//    return Point(0, 0, 0);
+//}
 
 Material Object::getMaterial(const Point &p) const {
     return Material();
-}
-
-Ray Object::getNormal(const Point &p, const Point &o)  {
-    return Ray(0, 0, 0, 0, 0, 0);
 }

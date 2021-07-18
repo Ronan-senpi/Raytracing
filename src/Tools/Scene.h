@@ -5,17 +5,24 @@
 #ifndef RAYTRACING_SCENE_H
 #define RAYTRACING_SCENE_H
 
+#include <utility>
 #include <vector>
 #include "Color.h"
 #include "Light.h"
 #include "Objects/Object.h"
+#include "Camera.h"
 
 class Scene {
 private:
     Color bgColor, ambiantColor;
     std::vector<Light> lights;
     std::vector<Object> objects;
+    Camera camera;
 public:
+
+    Scene(std::vector<Light> li, std::vector<Object> obj, Camera cam) : lights(std::move(li)), objects(std::move(obj)),
+                                                                        camera(std::move(cam)) {};
+
     /**
      * retourne un pointeur vers l'objet intersecté par le rayon passé en paramètre le plus proche,
      * et nullptr si il n'y en a pas.
@@ -59,7 +66,7 @@ public:
         return lights[i];
     }
 
-    Color getImpactColor(const Ray &ray, Object &obj, const Point &impact) ;
+    Color getImpactColor(const Ray &ray, Object &obj, const Point &impact);
 
 };
 

@@ -19,21 +19,18 @@ private:
 public:
     Object() = default;
 
-    Object(std::string n, Material m) : name(std::move(n)), mat(m) {}
+    Object(Vector trans, Vector rot, Vector sca, std::string n, Material m) : name(std::move(n)), mat(m),
+                                                                              Entity(trans, rot, sca) {}
 
     ~Object() = default;
 
-    Point getTextureCoordinates(const Point &p) const;
+    //Point getTextureCoordinates(const Point &p) const = 0;
+
+    virtual Ray getNormal(const Point &p, const Point &o) = 0;
+
+    virtual bool intersect(const Ray &ray, Point &impact) = 0;
 
     Material getMaterial(const Point &p) const;
-
-    virtual Ray getNormal(const Point &p, const Point &o);
-
-    virtual bool intersect(const Ray &ray, Point &impact) { return false; };
-
-    Material material() const {
-        return mat;
-    }
 
     void material(Material m) {
         mat = m;

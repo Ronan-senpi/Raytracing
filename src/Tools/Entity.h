@@ -12,7 +12,7 @@
 
 class Entity {
 protected:
-    Point translation = Vector(0, 0, 0);
+    Vector translation = Vector(0, 0, 0);
     Vector rotation = Vector(0, 0, 0);
     Vector scale = Vector(1, 1, 1);
     Matrix trans;
@@ -21,7 +21,7 @@ public:
 
     Entity() = default;
 
-    Entity(Point pos, Vector rot, Vector sca) /*: _position(pos), _rotation(rot), _scale(sca) */{
+    Entity(Vector pos, Vector rot, Vector sca) /*: _position(pos), _rotation(rot), _scale(sca) */{
         trans = Matrix();
         translate(pos);
         rotate(rot);
@@ -58,8 +58,8 @@ public:
         return translation;
     }
 
-    void getTranslation(Vector val) {
-        translation = val;
+    Vector getTranslation() {
+        return translation;
     }
 
     Vector getRotation() const {

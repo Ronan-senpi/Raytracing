@@ -13,11 +13,11 @@ public:
 
     Vector() : Point(0, 0, 0) {};
 
-    Vector(float x, float y, float z) : Point(x, y, z) {}
+    Vector(const float &x, const float &y, const float &z) : Point(x, y, z) {}
 
-    Vector(const Vector &v) : Point(v.m_x, v.m_y, v.m_z) {}
+    Vector(const Vector &v) : Point(v) {}
 
-    Vector(const Point &p) : Point(p.X(), p.Y(), p.Z()) {}
+    Vector(const Point &p) : Point(p) {}
 
     float norm() const;
 
