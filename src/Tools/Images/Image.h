@@ -11,7 +11,6 @@
 
 #include "ImageType.h"
 #include "../Color.h"
-#include "Pixel.h"
 
 class Image {
 private:
@@ -22,6 +21,16 @@ private:
     int channel;
     std::array<int, 2> leftTop;
     std::array<int, 2> rightBottom;
+
+    static float serialize(float v, float min, float max) {
+        return (v - min) / (max - min);
+    }
+
+    static int deserialize(float v, float min, float max) {
+        return int(v * (max - min) + min);
+    }
+
+
 public:
 
     std::string path;

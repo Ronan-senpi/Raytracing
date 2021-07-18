@@ -73,10 +73,6 @@ public:
     Vector scale() const {
         return _scale;
     }
-
-    void scale(Vector val) {
-        _scale = val;
-    }
 };
 
 std::ostream &operator<<(std::ostream &os, const Entity &v);

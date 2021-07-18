@@ -33,7 +33,7 @@ int main() {
     e.rotateX(12);
     e.rotateY(14);
     e.rotateZ(16);
-    e.scale(3);
+    //e.scale(3);
     std::cout << e << std::endl;
     e.rotate(v);
     std::cout << e << std::endl;
@@ -52,13 +52,13 @@ int main() {
     Matrix mult = a * b;
     std::cout << mult << std::endl;
 
-    Image(500, 500, {255, 0, 0}).write("out.png");
-
-    Matrix multiplyPoint({1,2,5,6,8,0,4,0,6,2,4,7,8,9,2,1});
-    Point pointFoisMat(4,5,9);
-    Vector vecFoisMat(4,5,9);
+    Matrix multiplyPoint({1, 2, 5, 6, 8, 0, 4, 0, 6, 2, 4, 7, 8, 9, 2, 1});
+    Point pointFoisMat(4, 5, 9);
+    Vector vecFoisMat(4, 5, 9);
     Point resultPointFoisMat = multiplyPoint * pointFoisMat;
     Vector resultVecFoisMat = multiplyPoint * vecFoisMat;
-    std::cout<< resultPointFoisMat <<std::endl;
-    std::cout<< resultVecFoisMat <<std::endl;
+    std::cout << resultPointFoisMat << std::endl;
+    std::cout << resultVecFoisMat << std::endl;
+
+    Image(500, 500, {0.5, 0.5, 0}).write("out.png");
 }

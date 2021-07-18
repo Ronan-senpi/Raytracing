@@ -15,6 +15,7 @@
 #include "../Helpers/Debug.h"
 #include "../Helpers/StringHelpers.h"
 
+
 Image::Image(const std::string &filename) {
     if (read(filename)) {
         Debug::log("Read " + filename);
@@ -75,39 +76,38 @@ ImageType Image::getImageType(const std::string &filename) {
 Color Image::operator()(const int &x, const int &y) const {
     Color pixel;
     if (channel == 1) {
-        pixel.R(data[(x * 1 * width) + (y * 1)]);
+        pixel.R(serialize(data[(x * 1 * width) + (y * 1)], 0, 255));
     } else if (channel == 2) {
-        pixel.R(data[(x * 2 * width) + (y * 2)]);
-        pixel.G(data[(x * 2 * width) + (y * 2) + 1]);
+        pixel.R(serialize(data[(x * 2 * width) + (y * 2)], 0, 255));
+        pixel.G(serialize(data[(x * 2 * width) + (y * 2) + 1], 0, 255));
     } else if (channel == 3) {
-        pixel.R(data[(x * 3 * width) + (y * 3)]);
-        pixel.G(data[(x * 3 * width) + (y * 3) + 1]);
-        pixel.B(data[(x * 3 * width) + (y * 3) + 2]);
+        pixel.R(serialize(data[(x * 3 * width) + (y * 3)], 0, 255));
+        pixel.G(serialize(data[(x * 3 * width) + (y * 3) + 1], 0, 255));
+        pixel.B(serialize(data[(x * 3 * width) + (y * 3) + 2], 0, 255));
     } else if (channel == 4) {
-        pixel.R(data[(x * 4 * width) + (y * 4)]);
-        pixel.G(data[(x * 4 * width) + (y * 4) + 1]);
-        pixel.B(data[(x * 4 * width) + (y * 4) + 2]);
-        pixel.A(data[(x * 4 * width) + (y * 4) + 3]);
+        pixel.R(serialize(data[(x * 4 * width) + (y * 4)], 0, 255));
+        pixel.G(serialize(data[(x * 4 * width) + (y * 4) + 1], 0, 255));
+        pixel.B(serialize(data[(x * 4 * width) + (y * 4) + 2], 0, 255));
+        pixel.A(serialize(data[(x * 4 * width) + (y * 4) + 3], 0, 255));
     }
     return pixel;
 }
 
 void Image::operator()(const int &x, const int &y, const Color &color) {
     if (channel == 1) {
-        data[(x * 1 * width) + (y * 1)] = color.R();
+        data[(x * 1 * width) + (y * 1)] = deserialize(color.R(), 0, 255);
     } else if (channel == 2) {
-        data[(x * 2 * width) + (y * 2)] = color.R();
-        data[(x * 2 * width) + (y * 2) + 1] = color.G();
+        data[(x * 2 * width) + (y * 2)] = deserialize(color.R(), 0, 255);
+        data[(x * 2 * width) + (y * 2) + 1] = deserialize(color.G(), 0, 255);
     } else if (channel == 3) {
-        data[(x * 3 * width) + (y * 3)] = color.R();
-        data[(x * 3 * width) + (y * 3) + 1] = color.G();
-        data[(x * 3 * width) + (y * 3) + 2] = color.B();
+        data[(x * 3 * width) + (y * 3)] = deserialize(color.R(), 0, 255);
+        data[(x * 3 * width) + (y * 3) + 1] = deserialize(color.G(), 0, 255);
+        data[(x * 3 * width) + (y * 3) + 2] = deserialize(color.B(), 0, 255);
     } else if (channel == 4) {
-        data[(x * 4 * width) + (y * 4)] = color.R();
-        data[(x * 4 * width) + (y * 4) + 1] = color.G();
-        data[(x * 4 * width) + (y * 4) + 2] = color.B();
-        data[(x * 4 * width) + (y * 4) + 3] = color.A();
+        data[(x * 4 * width) + (y * 4)] = deserialize(color.R(), 0, 255);
+        data[(x * 4 * width) + (y * 4) + 1] = deserialize(color.G(), 0, 255);
+        data[(x * 4 * width) + (y * 4) + 2] = deserialize(color.B(), 0, 255);
+        data[(x * 4 * width) + (y * 4) + 3] = deserialize(color.A(), 0, 255);
     }
 }
-
 
