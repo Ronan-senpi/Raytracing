@@ -5,7 +5,10 @@
 #include "Ray.h"
 
 
-std::ostream& operator<<(std::ostream& os, const Ray& r)
-{
+std::ostream &operator<<(std::ostream &os, const Ray &r) {
     return os << "(" << "Origin : " << r.Origin() << " and Direction : " << r.Direction() << std::endl;
+}
+
+Ray Ray::normalized() {
+    return Ray(origin, direction.normalized());
 }

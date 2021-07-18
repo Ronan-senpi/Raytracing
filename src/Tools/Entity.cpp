@@ -9,9 +9,9 @@ void Entity::translate(const Vector transVec) {
     m(0, 3) = transVec.X();
     m(1, 3) = transVec.Y();
     m(2, 3) = transVec.Z();
-    _position = transVec;
-    _trans = m * _trans;
-    _transInv = _trans.inverse();
+    translation = transVec;
+    trans = m * trans;
+    transInv = trans.inverse();
 }
 
 void Entity::rotateX(const float deg) {
@@ -22,9 +22,9 @@ void Entity::rotateX(const float deg) {
     m(1, 2) = -s;
     m(2, 1) = s;
     m(2, 2) = c;
-    _rotation.X(deg);
-    _trans = m * _trans;
-    _transInv = _trans.inverse();
+    rotation.X(deg);
+    trans = m * trans;
+    transInv = trans.inverse();
 }
 
 void Entity::rotateY(const float deg) {
@@ -35,9 +35,9 @@ void Entity::rotateY(const float deg) {
     m(0, 2) = s;
     m(2, 0) = -s;
     m(2, 2) = c;
-    _rotation.Y(deg);
-    _trans = m * _trans;
-    _transInv = _trans.inverse();
+    rotation.Y(deg);
+    trans = m * trans;
+    transInv = trans.inverse();
 }
 
 void Entity::rotateZ(const float deg) {
@@ -48,19 +48,19 @@ void Entity::rotateZ(const float deg) {
     m(0, 1) = -s;
     m(1, 0) = s;
     m(1, 1) = c;
-    _rotation.Z(deg);
-    _trans = m * _trans;
-    _transInv = _trans.inverse();
+    rotation.Z(deg);
+    trans = m * trans;
+    transInv = trans.inverse();
 }
 
-void Entity::scale(const Vector factor) {
+void Entity::scaling(Vector factor) {
     Matrix m;
     m(0, 0) = factor.X();
     m(1, 1) = factor.Y();
     m(2, 2) = factor.Z();
-    _scale = factor;
-    _trans = m * _trans;
-    _transInv = _trans.inverse();
+    scale = factor;
+    trans = m * trans;
+    transInv = trans.inverse();
 }
 
 void Entity::rotate(const Vector deg) {
@@ -78,21 +78,21 @@ Ray Entity::globalToLocal(const Ray &r) {
 }
 
 Point Entity::localToGlobal(const Point &p) {
-    return _transInv * p;
+    return transInv * p;
 }
 
 Vector Entity::localToGlobal(const Vector &v) {
-    return _transInv * v;
+    return transInv * v;
 }
 
 Point Entity::globalToLocal(const Point &p) {
-    return _trans * p;
+    return trans * p;
 }
 
 Vector Entity::globalToLocal(const Vector &v) {
-    return _trans * v;
+    return trans * v;
 }
 
 std::ostream &operator<<(std::ostream &os, const Entity &e) {
-    return os << "position : " << e.position() << " | Rotation : " << e.rotation() << " | Scale : " << e.scale();
+    return os << "getTranslation : " << e.position() << " | Rotation : " << e.getRotation() << " | Scale : " << e.getScale();
 }

@@ -11,24 +11,30 @@
 
 class Ray {
 private:
-    Point m_origin;
-    Vector m_direction;
+    Point origin;
+    Vector direction;
 public:
-    Ray(float ox, float oy, float oz, float dx, float dy, float dz) : m_origin(ox, oy, oz), m_direction(dx,dy,dz){}
-    Ray(Point origin, Vector direction) : m_origin(origin), m_direction(direction){}
+    Ray(float ox, float oy, float oz, float dx, float dy, float dz) : origin(ox, oy, oz), direction(dx, dy, dz) {}
 
-    Point Origin()const{
-        return m_origin;
+    Ray(Point origin, Vector direction) : origin(origin), direction(direction) {}
+
+    Point Origin() const {
+        return origin;
     }
-    void Origin(Point p){
-        m_origin = p;
+
+    void Origin(Point p) {
+        origin = p;
     }
-    Vector Direction()const{
-        return m_direction;
+
+    Vector Direction() const {
+        return direction;
     }
-    void Direction(Vector v){
-        m_direction = v;
+
+    void Direction(Vector v) {
+        direction = v;
     }
+
+    Ray normalized();
 };
 
 std::ostream &operator<<(std::ostream &os, const Ray &r);

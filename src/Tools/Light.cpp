@@ -9,13 +9,13 @@ Ray Light::getRayToLight(const Point &p) const {
 }
 
 Ray Light::getRayFromLight(const Point &p) const {
-    return {_position, getVectorFromLight(p)};
+    return {translation, getVectorFromLight(p)};
 }
 
 Vector Light::getVectorToLight(const Point &p) const {
-    return Vector(p-_position).normalized();
+    return Vector(p - translation).normalized();
 }
 
 Vector Light::getVectorFromLight(const Point &p) const {
-    return Vector(_position-p).normalized();
+    return Vector(translation - p).normalized();
 }
