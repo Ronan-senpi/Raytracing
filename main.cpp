@@ -1,21 +1,29 @@
 #include <iostream>
+#include <vector>
+
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
-#include "src/Tools/Ray.h"
-
 #include "src/Tools/Images/Image.h"
 #include "src/Tools/Objects/Sphere.h"
 #include "src/Tools/Camera.h"
+#include "src/Tools/Light.h"
+#include "src/Tools/Scene.h"
 
 int main() {
+    std::vector<Object *> objs{};
+    std::vector<Light> lights{};
     Material m({1, 0, 0}, {1, 0, 0}, {1, 0, 0}, 0.5);
-    Vector trans(1, 1, 1);
+    Vector trans(0, 0, 5);
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Sphere s1(trans, rot, sca, name, m);
-    Sphere s2();
+    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
+    objs.push_back(s1);
+
+//    Sphere s2();
     Camera cam(5);
+    Scene scene(lights, objs, cam, "Scene1");
+    scene.screenshot();
 }
 
 

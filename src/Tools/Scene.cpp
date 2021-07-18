@@ -8,7 +8,7 @@ Object *Scene::closer_intersected(const Ray &ray, Point &impact) const {
     throw "Implem";
 }
 
-Color Scene::getImpactColor(const Ray &ray, Object &obj, const Point &impact)  {
+Color Scene::getImpactColor(const Ray &ray, Object &obj, const Point &impact) {
     Color ambiant = obj.getMaterial(impact).Ka() * (getAmbiant());
     Ray normal = obj.getNormal(impact, ray.Origin());
 
@@ -32,4 +32,8 @@ Color Scene::getImpactColor(const Ray &ray, Object &obj, const Point &impact)  {
 
     }
     return ambiant + diffuse + specular;
+}
+
+void Scene::screenshot() {
+    camera.screenshot(objects, name + ".png", 500, 500);
 }

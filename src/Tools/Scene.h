@@ -7,6 +7,7 @@
 
 #include <utility>
 #include <vector>
+#include <string>
 #include "Color.h"
 #include "Light.h"
 #include "Objects/Object.h"
@@ -16,12 +17,15 @@ class Scene {
 private:
     Color bgColor, ambiantColor;
     std::vector<Light> lights;
-    std::vector<Object> objects;
+    std::vector<Object *> objects;
     Camera camera;
+    std::string name;
 public:
 
-    Scene(std::vector<Light> li, std::vector<Object> obj, Camera cam) : lights(std::move(li)), objects(std::move(obj)),
-                                                                        camera(std::move(cam)) {};
+    Scene(std::vector<Light> li, std::vector<Object *> obj, Camera cam, std::string name) : lights(std::move(li)),
+                                                                                            objects(std::move(obj)),
+                                                                                            camera(cam),
+                                                                                            name(std::move(name)) {};
 
     /**
      * retourne un pointeur vers l'objet intersecté par le rayon passé en paramètre le plus proche,
@@ -67,6 +71,8 @@ public:
     }
 
     Color getImpactColor(const Ray &ray, Object &obj, const Point &impact);
+
+    void screenshot();
 
 };
 
