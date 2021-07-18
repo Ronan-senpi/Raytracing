@@ -18,6 +18,13 @@ private:
     Color ka, kd, ks;
     float shininess;
 public:
+
+    Material() = default;
+
+    Material(Color ka, Color kd, Color ks, float shin) : ka(ka), kd(kd), ks(ks), shininess(shin) {}
+
+    ~Material() = default;
+
     void Shininess(const float s) {
         shininess = s;
     }
