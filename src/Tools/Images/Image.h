@@ -30,10 +30,9 @@ private:
         return int(v * (max - min) + min);
     }
 
-
+    std::string path;
 public:
 
-    std::string path;
 
     Image(const std::string &filename);
 
