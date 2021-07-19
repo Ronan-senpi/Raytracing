@@ -69,6 +69,10 @@ public:
     Vector getScale() const {
         return scale;
     }
+
+    Matrix getMatrix() const {
+        return trans;
+    }
 };
 
 std::ostream &operator<<(std::ostream &os, const Entity &v);

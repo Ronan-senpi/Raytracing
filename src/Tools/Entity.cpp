@@ -78,21 +78,22 @@ Ray Entity::globalToLocal(const Ray &r) {
 }
 
 Point Entity::localToGlobal(const Point &p) {
-    return transInv * p;
-}
-
-Vector Entity::localToGlobal(const Vector &v) {
-    return transInv * v;
-}
-
-Point Entity::globalToLocal(const Point &p) {
     return trans * p;
 }
 
-Vector Entity::globalToLocal(const Vector &v) {
+Vector Entity::localToGlobal(const Vector &v) {
     return trans * v;
 }
 
+Point Entity::globalToLocal(const Point &p) {
+    return transInv * p;
+}
+
+Vector Entity::globalToLocal(const Vector &v) {
+    return transInv * v;
+}
+
 std::ostream &operator<<(std::ostream &os, const Entity &e) {
-    return os << "getTranslation : " << e.position() << " | Rotation : " << e.getRotation() << " | Scale : " << e.getScale();
+    return os << "getTranslation : " << e.position() << " | Rotation : " << e.getRotation() << " | Scale : "
+              << e.getScale();
 }

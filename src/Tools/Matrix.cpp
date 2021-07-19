@@ -31,9 +31,9 @@ std::array<float, 16> Matrix::identiy() const {
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
             if (i == j)
-                a[i = 4 + j] = 1;
+                a[i * 4 + j] = 1;
             else
-                a[i = 4 + j] = 0;
+                a[i * 4 + j] = 0;
         }
     }
     return a;
@@ -191,10 +191,11 @@ Matrix Matrix::operator*(float f) {
 Point Matrix::operator*(Point p) {
     Point res;
     float w;
-    res.X((*this)(0, 0) * p.X() + (*this)(1, 0) * p.Y() + (*this)(2, 0) * p.Z() + (*this)(3, 0));
-    res.Y((*this)(0, 1) * p.X() + (*this)(1, 1) * p.Y() + (*this)(2, 1) * p.Z() + (*this)(3, 1));
-    res.Z((*this)(0, 2) * p.X() + (*this)(1, 2) * p.Y() + (*this)(2, 2) * p.Z() + (*this)(3, 2));
-    w = (*this)(0, 3) * p.X() + (*this)(1, 3) * p.Y() + (*this)(2, 3) * p.Z() + (*this)(3, 3);
+    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z() + (*this)(0, 3));
+    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z() + (*this)(1, 3));
+    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z() + (*this)(2, 3));
+
+    w = (*this)(3, 0) * p.X() + (*this)(3, 1) * p.Y() + (*this)(3, 2) * p.Z() + (*this)(3, 3);
 
     w = 1.0f / w;
     res.X(res.X() * w);
@@ -205,17 +206,21 @@ Point Matrix::operator*(Point p) {
 
 Vector Matrix::operator*(Vector p) {
     Vector res;
-    res.X((*this)(0, 0) * p.X() + (*this)(1, 0) * p.Y() + (*this)(2, 0) * p.Z());
-    res.Y((*this)(0, 1) * p.X() + (*this)(1, 1) * p.Y() + (*this)(2, 1) * p.Z());
-    res.Z((*this)(0, 2) * p.X() + (*this)(1, 2) * p.Y() + (*this)(2, 2) * p.Z());
+    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z());
+    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z());
+    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z());
     return res;
 }
 
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
     std::array<float, 16> arr = matrix.getMatrix();
-    for (float i : arr) {
-        os << "(" << i << ")";
+    for (int i = 0; i < arr.size(); i++) {
+        if (i % 4 == 0) {
+            os << std::endl;
+        }
+        os << " " << arr[i] << " ";
     }
+
     return os << std::endl;
 }
 
