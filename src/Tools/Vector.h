@@ -19,7 +19,6 @@ public:
 
     Vector(const Point &p) : Point(p) {}
 
-    float norm() const;
 
     Vector normalized() const;
 };

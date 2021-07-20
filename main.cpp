@@ -14,7 +14,7 @@ int main() {
     std::vector<Light> lights{};
     Material m({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
 
-    Vector trans(1, 0, -10);
+    Vector trans(0, 0, -10);
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";

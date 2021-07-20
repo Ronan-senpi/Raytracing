@@ -19,7 +19,7 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
     Image im(w, h, {0, 0.5, 0.5});
     for (int x = 0; x < w; ++x) {
         for (int y = 0; y < h; ++y) {
-            Ray r = getRay(Serializer::serialize(x, 0, w), Serializer::serialize(y, 0, w));
+            Ray r = getRay(Serializer::serialize(x, 0, w - 1), Serializer::serialize(y, 0, h - 1));
             Point impact;
             Object *nearestObj = nullptr;
             for (Object *o : objects) {
@@ -33,7 +33,9 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
             }
             if (nearestObj) {
                 Material m = nearestObj->getMaterial(impact);
-                im(x, y, m.Ka());
+                Ray normal = nearestObj->getNormal(impact, r.Origin());
+                Color pixel(normal.Direction().X(), normal.Direction().Y(), normal.Direction().Z());
+                im(x, y, pixel);
             }
         }
     }

@@ -5,6 +5,8 @@
 #ifndef RAYTRACING_COLOR_H
 #define RAYTRACING_COLOR_H
 
+#include "Point.h"
+#include <algorithm>
 
 class Color {
 private:
@@ -14,7 +16,13 @@ public:
 
     Color(const Color &c) = default;
 
-    Color(float r, float g, float b) : r(r), g(g), b(b) {}
+    Color(const Point &p) : r(p.X()), g(p.Y()), b(p.Z()) {}
+
+    Color(float r, float g, float b) : r(r), g(g), b(b) {
+        r = std::clamp(r, 0.0f, 1.0f);
+        g = std::clamp(g, 0.0f, 1.0f);
+        b = std::clamp(b, 0.0f, 1.0f);
+    }
 
     ~Color() = default;
 

@@ -5,9 +5,6 @@
 #include "Vector.h"
 #include <cmath>
 
-float Vector::norm() const {
-    return sqrtf(pow(this->m_x, 2) + pow(this->m_y, 2) + pow(this->m_z, 2));
-}
 
 Vector Vector::normalized() const {
     float magnitude = this->norm();

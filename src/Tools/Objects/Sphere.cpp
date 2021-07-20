@@ -5,70 +5,32 @@
 #include "Sphere.h"
 #include "../Vector.h"
 
-bool Sphere::intersect(const Ray &ray, Point &impact)  {
-    Ray r = globalToLocal(ray);
+bool Sphere::intersect(const Ray &ray, Point &impact) {
+    Ray r = globalToLocal(ray).normalized();
+    float a = r.Direction().dot(r.Direction());
+    float b = 2 * r.Direction().dot(r.Origin());
+    float c = r.Origin().dot(r.Origin()) - 1.0;
+    float delta = b * b - 4 * a * c;
 
-    float a = (r.Direction().X() * r.Direction().X())
-              + (r.Direction().Y() * r.Direction().Y())
-              + (r.Direction().Z() * r.Direction().Z());
+    if (delta < 0)return false;
 
-    float b = 2 * (r.Direction().X() * r.Origin().X()
-                   + r.Direction().Y() * r.Origin().Y()
-                   + r.Direction().Z() * r.Origin().Z());
-
-    float c = (r.Origin().X() * r.Origin().X())
-              + (r.Origin().Y() * r.Origin().Y())
-              + (r.Origin().Z() * r.Origin().Z()) - 1;
-
-    float delta = (b * b) - 4 * a * c;
-
-    if (delta < 0) {
-        return false;
+    float t;
+    if (delta < 0.0001) {
+        t = -b / (2 * a);
+    } else {
+        t = (-b - sqrt(delta)) / (2 * a);
+        if (t < 0)t = (-b + sqrt(delta)) / (2 * a);
     }
-    if (delta == 0) {
-        float t = -b / (2 * a);
-        Point p;
-        p.X(r.Origin().X() + r.Direction().X() * t);
-        p.Y(r.Origin().Y() + r.Direction().Y() * t);
-        p.Z(r.Origin().Z() + r.Direction().Z() * t);
-        impact = localToGlobal(p);
-        return true;
-    }
-    float t1 = (-b - sqrt(delta)) / (2 * a);
-    float t2 = (-b + sqrt(delta)) / (2 * a);
+    if (t < 0)return false;
 
-    if (t1 > 0) {
-        Point p;
-        p.X(r.Origin().X() + r.Direction().X() * t1);
-        p.Y(r.Origin().Y() + r.Direction().Y() * t1);
-        p.Z(r.Origin().Z() + r.Direction().Z() * t1);
-        impact = localToGlobal(p);
-        return true;
-    }
-
-    if (t2 > 0) {
-        Point p;
-        p.X(r.Origin().X() + r.Direction().X() * t2);
-        p.Y(r.Origin().Y() + r.Direction().Y() * t2);
-        p.Z(r.Origin().Z() + r.Direction().Z() * t2);
-        impact = localToGlobal(p);
-        return true;
-    }
-    return false;
+    Point p = r.Origin() + r.Direction() * t;
+    impact = localToGlobal(p);
+    return true;
 }
 
-Ray Sphere::getNormal(const Point &p, const Point &o)  {
-    Point oo = globalToLocal(o);
-    Point i = globalToLocal(p);
-
-    float d = sqrt(o.X() * o.X() + o.Y() * o.Y() + o.Z() * o.Z());
-
-    Vector v;
-    if (d < 1) {
-        v = i * -1;
-    } else {
-        v = i;
-    }
-    Ray ray(p, v.normalized());
-    return ray;
+Ray Sphere::getNormal(const Point &p, const Point &o) {
+    Point lp = globalToLocal(p);
+    Point lo = globalToLocal(o);
+    if ((lo - Point(0, 0, 0)).norm() < 1)return localToGlobal(Ray(lp, -lp)).normalized();
+    return localToGlobal(Ray(lp, lp)).normalized();
 }
