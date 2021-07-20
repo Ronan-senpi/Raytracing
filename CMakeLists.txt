@@ -44,7 +44,7 @@ add_executable(Raytracing main.cpp
         src/Tools/Helpers/StringHelpers.cpp
         src/Tools/Helpers/StringHelpers.h
         src/Tools/Camera.cpp
-        src/Tools/Camera.h)
+        src/Tools/Camera.h src/Tools/Helpers/Serializer.h)
 
 target_include_directories(Raytracing PRIVATE
         "Libraries/opencv/build/include"

@@ -4,6 +4,7 @@
 
 #include "Camera.h"
 #include "Images/Image.h"
+#include "Helpers/Serializer.h"
 
 Ray Camera::getRay(const float x, const float y) {
     Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
@@ -15,10 +16,10 @@ Ray Camera::getRay(const float x, const float y) {
 
 void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
                         const int h, const int w) {
-    Image im(h, w, {0, 0.5, 0.5});
-    for (int x = 0; x < h; ++x) {
-        for (int y = 0; y < w; ++y) {
-            Ray r = getRay(x, y);
+    Image im(w, h, {0, 0.5, 0.5});
+    for (int x = 0; x < w; ++x) {
+        for (int y = 0; y < h; ++y) {
+            Ray r = getRay(Serializer::serialize(x, 0, w), Serializer::serialize(y, 0, h));
             Point impact;
             Object *nearestObj = nullptr;
             for (Object *o : objects) {

@@ -12,25 +12,16 @@
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light> lights{};
-    Material m({1, 0, 0}, {1, 0, 0}, {1, 0, 0}, 0.5);
-    Vector trans(0, 0., -10);
+    Material m3({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
+
+    Vector trans3(0, 0, 0);
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
-    std::cout << s1->getMatrix() << std::endl;
-    // s1->translate({5, 0, 0});
-    std::cout << "TRANSLATE" << std::endl;
-    std::cout << s1->getMatrix() << std::endl;
+    Sphere *s3 = new Sphere(trans3, rot, sca, name, m3);
+    objs.push_back(s3);
 
-    Point vecLoc(0, 0, 0);
-    vecLoc = s1->globalToLocal(vecLoc);
-    std::cout << vecLoc << std::endl;
-    objs.push_back(s1);
-
-//    Sphere s2();
-    Camera cam(15);
-    std::cout << cam.getMatrix() << std::endl;
+    Camera cam(30);
     Scene scene(lights, objs, cam, "Scene1");
     scene.screenshot();
 }

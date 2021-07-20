@@ -22,14 +22,6 @@ private:
     std::array<int, 2> leftTop;
     std::array<int, 2> rightBottom;
 
-    static float serialize(float v, float min, float max) {
-        return (v - min) / (max - min);
-    }
-
-    static int deserialize(float v, float min, float max) {
-        return int(v * (max - min) + min);
-    }
-
     std::string path;
 public:
 
