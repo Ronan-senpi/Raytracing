@@ -10,13 +10,27 @@ float Point::dot(const Point &p) const {
 
 float Point::operator[](const int i) const {
     if (i == 0)
-        return this->m_x;
+        return m_x;
 
     if (i == 1)
-        return this->m_y;
+        return m_y;
 
     if (i == 2)
-        return this->m_z;
+        return m_z;
+    else
+        throw std::out_of_range("0, 1 or 2");
+}
+
+
+float &Point::operator[](const int i) {
+    if (i == 0)
+        return m_x;
+
+    if (i == 1)
+        return m_y;
+
+    if (i == 2)
+        return m_z;
     else
         throw std::out_of_range("0, 1 or 2");
 }

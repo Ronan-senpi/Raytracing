@@ -15,11 +15,11 @@ Ray Camera::getRay(const float x, const float y) {
 }
 
 void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
-                        const int h, const int w) {
+                        const int w, const int h) {
     Image im(w, h, {0, 0.5, 0.5});
     for (int x = 0; x < w; ++x) {
         for (int y = 0; y < h; ++y) {
-            Ray r = getRay(Serializer::serialize(x, 0, w), Serializer::serialize(y, 0, h));
+            Ray r = getRay(Serializer::serialize(x, 0, w), Serializer::serialize(y, 0, w));
             Point impact;
             Object *nearestObj = nullptr;
             for (Object *o : objects) {

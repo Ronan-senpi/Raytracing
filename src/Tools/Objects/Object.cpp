@@ -9,5 +9,5 @@
 //}
 
 Material Object::getMaterial(const Point &p) const {
-    return Material();
+    return mat;
 }

@@ -9,36 +9,44 @@
 #include <array>
 #include "Point.h"
 #include "Vector.h"
+
 //
 ////Matrix 4x4
 class Matrix {
 private:
 
     std::array<float, 16> m = {};
+
     std::array<float, 16> identiy() const;
 
 public:
 
     Matrix();
+
     Matrix(const Matrix &mat);
+
     Matrix(std::array<float, 16> tab);
+
     ~Matrix() = default;
 
     std::array<float, 16> getMatrix() const;
 
     Matrix inverse() const;
 
-    float operator()(const int& i, const int& j) const;
+    float operator()(const int &i, const int &j) const;
+
     float &operator()(int i, int j);
 
-    Matrix operator*(Matrix mult);
-    Point operator*(Point p);
-    Vector operator*(Vector p);
-    Matrix operator*(float f);
+    Matrix operator*(const Matrix &mult) const;
+
+    Point operator*(const Point &p) const;
+
+    Vector operator*(const Vector &p) const;
+
+    Matrix operator*(const float &f) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix);
-
 
 
 #endif //RAYTRACING_MATRIX_H

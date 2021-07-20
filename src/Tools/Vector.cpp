@@ -11,10 +11,9 @@ float Vector::norm() const {
 
 Vector Vector::normalized() const {
     float magnitude = this->norm();
-    return {this->m_x / magnitude, this->m_x / magnitude, this->m_x / magnitude};
+    return {this->m_x / magnitude, this->m_y / magnitude, this->m_z / magnitude};
 }
 
-std::ostream& operator<<(std::ostream& os, const Vector& v)
-{
+std::ostream &operator<<(std::ostream &os, const Vector &v) {
     return os << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
 }

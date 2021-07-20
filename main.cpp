@@ -12,16 +12,17 @@
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light> lights{};
-    Material m3({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
+    Material m({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
 
-    Vector trans3(0, 0, 0);
+    Vector trans(1, 0, -10);
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Sphere *s3 = new Sphere(trans3, rot, sca, name, m3);
-    objs.push_back(s3);
+    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
+    objs.push_back(s1);
 
-    Camera cam(30);
+
+    Camera cam(3000);
     Scene scene(lights, objs, cam, "Scene1");
     scene.screenshot();
 }

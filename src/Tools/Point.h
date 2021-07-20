@@ -22,6 +22,8 @@ public:
 
     float operator[](int i) const;
 
+    float &operator[](int i);
+
     Point operator+(const Point &p) const;
 
     Point operator-(const Point &p) const;
@@ -32,7 +34,7 @@ public:
 
     Point operator*(float factor) const;
 
-   // float operator*(Point factor) const;
+    // float operator*(Point factor) const;
 
     Point operator/(float divide) const;
 

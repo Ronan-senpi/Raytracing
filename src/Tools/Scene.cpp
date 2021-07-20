@@ -35,5 +35,5 @@ Color Scene::getImpactColor(const Ray &ray, Object &obj, const Point &impact) {
 }
 
 void Scene::screenshot() {
-    camera.screenshot(objects, name + ".png", 500, 500);
+    camera.screenshot(objects, name + ".png", 1000, 1000);
 }

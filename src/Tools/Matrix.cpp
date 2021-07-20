@@ -169,7 +169,7 @@ std::array<float, 16> Matrix::getMatrix() const {
     return m;
 }
 
-Matrix Matrix::operator*(Matrix mult) {
+Matrix Matrix::operator*(const Matrix &mult) const {
     std::array<float, 16> arr{};
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -180,7 +180,7 @@ Matrix Matrix::operator*(Matrix mult) {
     return Matrix(arr);
 }
 
-Matrix Matrix::operator*(float f) {
+Matrix Matrix::operator*(const float &f) const {
     std::array<float, 16> arr{};
     for (int i = 0; i < 4; i++) {
         arr[i] = m[i] * f;
@@ -188,28 +188,38 @@ Matrix Matrix::operator*(float f) {
     return Matrix(arr);
 }
 
-Point Matrix::operator*(Point p) {
-    Point res;
-    float w;
-    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z() + (*this)(0, 3));
-    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z() + (*this)(1, 3));
-    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z() + (*this)(2, 3));
-
-    w = (*this)(3, 0) * p.X() + (*this)(3, 1) * p.Y() + (*this)(3, 2) * p.Z() + (*this)(3, 3);
-
-    w = 1.0f / w;
-    res.X(res.X() * w);
-    res.Y(res.Y() * w);
-    res.Z(res.Z() * w);
-    return res;
+Point Matrix::operator*(const Point &p) const {
+//    Point res;
+//    float w;
+//    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z() + (*this)(0, 3));
+//    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z() + (*this)(1, 3));
+//    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z() + (*this)(2, 3));
+//
+//    w = (*this)(3, 0) * p.X() + (*this)(3, 1) * p.Y() + (*this)(3, 2) * p.Z() + (*this)(3, 3);
+//
+//    w = 1.0f / w;
+//    res.X(res.X() * w);
+//    res.Y(res.Y() * w);
+//    res.Z(res.Z() * w);
+//    return res;
+    Point resultPoint;
+    for (int i = 0; i < 3; ++i) {
+        resultPoint[i] = (*this)(i, 0) * p[0] + (*this)(i, 1) * p[1] + (*this)(i, 2) * p[2] + (*this)(i, 3);
+    }
+    return resultPoint;
 }
 
-Vector Matrix::operator*(Vector p) {
-    Vector res;
-    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z());
-    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z());
-    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z());
-    return res;
+Vector Matrix::operator*(const Vector &v) const {
+//    Vector res;
+//    res.X((*this)(0, 0) * p.X() + (*this)(0, 1) * p.Y() + (*this)(0, 2) * p.Z());
+//    res.Y((*this)(1, 0) * p.X() + (*this)(1, 1) * p.Y() + (*this)(1, 2) * p.Z());
+//    res.Z((*this)(2, 0) * p.X() + (*this)(2, 1) * p.Y() + (*this)(2, 2) * p.Z());
+//    return res;
+    Vector resultVector;
+    for (int i = 0; i < 3; ++i) {
+        resultVector[i] = (*this)(i, 0) * v[0] + (*this)(i, 1) * v[1] + (*this)(i, 2) * v[2];
+    }
+    return resultVector;
 }
 
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {

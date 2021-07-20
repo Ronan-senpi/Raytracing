@@ -22,7 +22,6 @@ void Entity::rotateX(const float deg) {
     m(1, 2) = -s;
     m(2, 1) = s;
     m(2, 2) = c;
-    rotation.X(deg);
     trans = m * trans;
     transInv = trans.inverse();
 }
@@ -35,7 +34,6 @@ void Entity::rotateY(const float deg) {
     m(0, 2) = s;
     m(2, 0) = -s;
     m(2, 2) = c;
-    rotation.Y(deg);
     trans = m * trans;
     transInv = trans.inverse();
 }
@@ -48,7 +46,6 @@ void Entity::rotateZ(const float deg) {
     m(0, 1) = -s;
     m(1, 0) = s;
     m(1, 1) = c;
-    rotation.Z(deg);
     trans = m * trans;
     transInv = trans.inverse();
 }
@@ -69,31 +66,34 @@ void Entity::rotate(const Vector deg) {
     rotateZ(deg.Z());
 }
 
-Ray Entity::localToGlobal(const Ray &r) {
-    return {localToGlobal(r.Origin()), localToGlobal(r.Direction())};
+Ray Entity::localToGlobal(const Ray &r) const {
+    Point origin = localToGlobal(r.Origin());
+    Vector direction = localToGlobal(r.Direction());
+    return Ray(origin, direction);
 }
 
-Ray Entity::globalToLocal(const Ray &r) {
-    return {globalToLocal(r.Origin()), globalToLocal(r.Direction())};
+Ray Entity::globalToLocal(const Ray &r) const {
+    Point origin = globalToLocal(r.Origin());
+    Vector direction = globalToLocal(r.Direction());
+    return Ray(origin, direction);
 }
 
-Point Entity::localToGlobal(const Point &p) {
+Point Entity::localToGlobal(const Point &p) const {
     return trans * p;
 }
 
-Vector Entity::localToGlobal(const Vector &v) {
+Vector Entity::localToGlobal(const Vector &v) const {
     return trans * v;
 }
 
-Point Entity::globalToLocal(const Point &p) {
+Point Entity::globalToLocal(const Point &p) const {
     return transInv * p;
 }
 
-Vector Entity::globalToLocal(const Vector &v) {
+Vector Entity::globalToLocal(const Vector &v) const {
     return transInv * v;
 }
 
 std::ostream &operator<<(std::ostream &os, const Entity &e) {
-    return os << "getTranslation : " << e.position() << " | Rotation : " << e.getRotation() << " | Scale : "
-              << e.getScale();
+    return os << "Transformation matrix : " << e.getMatrix() << std::endl;
 }

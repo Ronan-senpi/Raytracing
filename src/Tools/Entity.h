@@ -13,7 +13,6 @@
 class Entity {
 protected:
     Vector translation = Vector(0, 0, 0);
-    Vector rotation = Vector(0, 0, 0);
     Vector scale = Vector(1, 1, 1);
     Matrix trans;
     Matrix transInv;
@@ -21,7 +20,7 @@ public:
 
     Entity() = default;
 
-    Entity(Vector pos, Vector rot, Vector sca) /*: _position(pos), _rotation(rot), _scale(sca) */{
+    Entity(Vector pos, Vector rot, Vector sca) {
         trans = Matrix();
         translate(pos);
         rotate(rot);
@@ -42,17 +41,17 @@ public:
 
     void scaling(Vector factor); // effectue un redimensionnement de facteur factor
 
-    Point localToGlobal(const Point &p);
+    Point localToGlobal(const Point &p) const;
 
-    Vector localToGlobal(const Vector &v);
+    Vector localToGlobal(const Vector &v) const;
 
-    Ray localToGlobal(const Ray &r);
+    Ray localToGlobal(const Ray &r) const;
 
-    Point globalToLocal(const Point &p);
+    Point globalToLocal(const Point &p) const;
 
-    Vector globalToLocal(const Vector &v);
+    Vector globalToLocal(const Vector &v) const;
 
-    Ray globalToLocal(const Ray &r);
+    Ray globalToLocal(const Ray &r) const;
 
     Vector position() const {
         return translation;
@@ -60,10 +59,6 @@ public:
 
     Vector getTranslation() {
         return translation;
-    }
-
-    Vector getRotation() const {
-        return rotation;
     }
 
     Vector getScale() const {
