@@ -9,7 +9,9 @@
 
 class Plan : public Object {
 public:
-    bool intersect(const Ray &ray, Point &impact)  override;
+    Plan(Vector trans, Vector rot, Vector sca, std::string n, Material m) : Object(trans, rot, sca, n, m) {}
+
+    bool intersect(const Ray &ray, Point &impact) override;
 
     Ray getNormal(const Point &p, const Point &o) override;
 
