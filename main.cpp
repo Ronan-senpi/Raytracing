@@ -21,7 +21,7 @@ int main() {
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Square *s1 = new Square(trans, rot, sca, name, m);
+    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
     std::cout << s1->getMatrix() << std::endl;
     objs.push_back(s1);
 
