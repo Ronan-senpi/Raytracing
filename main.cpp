@@ -15,19 +15,20 @@
 
 int main() {
     std::vector<Object *> objs{};
-    std::vector<Light> lights{};
-    Material m({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
-    Vector trans(0, 0, -20);
+    std::vector<Light *> lights{};
+    Material m({0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, 10);
+    Vector trans(1, 0, -20);
     Vector rot(0, 0, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
     Sphere *s1 = new Sphere(trans, rot, sca, name, m);
     std::cout << s1->getMatrix() << std::endl;
     objs.push_back(s1);
-
-    Camera cam(10);
-    Scene scene(lights, objs, cam, "Scene1");
-    scene.screenshot();
+    Light *l = new Light({1, 1, 1}, {0, 100, 0}, {0, 1, 0}, {1, 1, 1});
+    lights.push_back(l);
+    Scene scene(lights, objs, "Scene1");
+    Camera cam(10, scene);
+    cam.screenshot(objs, "SCENE1.jpg", 500, 500);
 }
 
 

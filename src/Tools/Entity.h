@@ -55,7 +55,7 @@ public:
         return trans;
     }
 
-    Vector position() {
+    Vector position() const {
         return Vector(trans(0, 3), trans(1, 3), trans(2, 3));
     }
 };

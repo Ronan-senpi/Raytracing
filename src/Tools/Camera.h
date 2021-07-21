@@ -10,17 +10,19 @@
 #include "Entity.h"
 #include "Ray.h"
 #include "Objects/Object.h"
+#include "Scene.h"
 
 class Camera : public Entity {
 private:
     float focal;
+    Scene scene;
 
     bool CloserThan(const Point &oldPoint, const Point &newPoint);
 
 public:
     Camera() = default;
 
-    Camera(float foc) : focal(foc), Entity() {}
+    Camera(float foc, Scene s) : focal(foc), scene(s), Entity() {}
 
     Camera(float foc, const Point pos, const Vector &rot, const Vector &sca) : focal(foc), Entity(pos, rot, sca) {}
 
@@ -29,6 +31,8 @@ public:
     Ray getRay(float x, float y);
 
     void screenshot(const std::vector<Object *> &objects, const std::string &filename, int h, int w);
+
+    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
 };
 
 

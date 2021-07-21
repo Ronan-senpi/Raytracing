@@ -21,7 +21,14 @@ public:
 
     Material() = default;
 
-    Material(Color ka, Color kd, Color ks, float shin) : ka(ka), kd(kd), ks(ks), shininess(shin) {}
+    Material(Color kam, Color kdiff, Color kspec, float shin) /* : ka(kam), kd(kdiff), ks(kspec), shininess(shin)*/{
+        std::cout << kam[0] << kam[1] << kam[2] << std::endl;
+        this->ka = kam;
+        this->kd = kdiff;
+        this->ks = kspec;
+        shininess = shin;
+        std::cout << ka[0] << ka[1] << ka[2] << std::endl;
+    }
 
     ~Material() = default;
 
