@@ -22,6 +22,10 @@ public:
     float norm() const;
 
     Vector normalized() const;
+
+    Vector operator*(const float factor) const {
+        return {this->m_x * factor, this->m_y * factor, this->m_z * factor};
+    }
 };
 
 std::ostream &operator<<(std::ostream &os, const Vector &v);

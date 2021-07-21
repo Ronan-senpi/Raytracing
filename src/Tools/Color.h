@@ -5,8 +5,11 @@
 #ifndef RAYTRACING_COLOR_H
 #define RAYTRACING_COLOR_H
 
-#include "Point.h"
 #include <algorithm>
+#include <iostream>
+
+#include "Point.h"
+#include "Helpers/Serializer.h"
 
 class Color {
 private:
@@ -18,10 +21,16 @@ public:
 
     Color(const Point &p) : r(p.X()), g(p.Y()), b(p.Z()) {}
 
-    Color(float r, float g, float b) : r(r), g(g), b(b) {
-        r = std::clamp(r, 0.0f, 1.0f);
-        g = std::clamp(g, 0.0f, 1.0f);
-        b = std::clamp(b, 0.0f, 1.0f);
+    Color(float red, float green, float blue) {
+//        this->r = std::clamp(red, 0.0f, 1.0f);
+//        this->g = std::clamp(green, 0.0f, 1.0f);
+//        this->b = std::clamp(blue, 0.0f, 1.0f);
+
+        this->r = Serializer::serialize(red, -1.0f, 1.0f);
+        this->g = Serializer::serialize(green, -1.0f, 1.0f);
+        this->b = Serializer::serialize(blue, -1.0f, 1.0f);
+//        std::cout << "raw (" << red << "," << green << "," << blue << ")" << std::endl;
+//        std::cout << "serialize (" << this->r << "," << this->g << "," << this->b << ")" << std::endl;
     }
 
     ~Color() = default;
@@ -37,7 +46,6 @@ public:
     Color operator*(float factor) const;
 
     Color &operator+=(Color c);
-
 
     void A(float val) const {
 
