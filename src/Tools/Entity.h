@@ -12,19 +12,17 @@
 
 class Entity {
 protected:
-    Vector translation = Vector(0, 0, 0);
-    Vector scale = Vector(1, 1, 1);
-    Matrix trans;
-    Matrix transInv;
+    Matrix trans = Matrix::identiy();
+    Matrix transInv = Matrix::identiy();
 public:
 
     Entity() = default;
 
     Entity(Vector pos, Vector rot, Vector sca) {
         trans = Matrix();
-        translate(pos);
-        rotate(rot);
         scaling(sca);
+        rotate(rot);
+        translate(pos);
     }
 
     ~Entity() = default;
@@ -53,20 +51,12 @@ public:
 
     Ray globalToLocal(const Ray &r) const;
 
-    Vector position() const {
-        return translation;
-    }
-
-    Vector getTranslation() {
-        return translation;
-    }
-
-    Vector getScale() const {
-        return scale;
-    }
-
     Matrix getMatrix() const {
         return trans;
+    }
+
+    Vector position() {
+        return Vector(trans(0, 3), trans(1, 3), trans(2, 3));
     }
 };
 

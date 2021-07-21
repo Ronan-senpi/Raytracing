@@ -27,3 +27,12 @@ bool Cylinder::intersect(const Ray &ray, Point &impact) {
     impact = localToGlobal(p);
     return true;
 }
+
+Ray Cylinder::getNormal(const Point &p, const Point &o) {
+    Point lp = globalToLocal(p);
+    Point lo = globalToLocal(o);
+    if (Vector((lo - Point(0, lo[1], 0))).norm() > 1)
+        return localToGlobal(Ray(lp, Vector(lp[0], 0, lp[2]))).normalized();
+    return localToGlobal(Ray(lp, Vector(-lp[0], 0, -lp[2]))).normalized();
+
+}

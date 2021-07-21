@@ -13,7 +13,7 @@
 
 class Camera : public Entity {
 private:
-    float focal = 5;
+    float focal;
 
     bool CloserThan(const Point &oldPoint, const Point &newPoint);
 

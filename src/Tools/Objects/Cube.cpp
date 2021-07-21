@@ -4,76 +4,51 @@
 
 #include "Cube.h"
 
-bool Cube::intersect(const Ray &ray, Point &impact)  {
-    Ray r = globalToLocal(ray);
-    float tmin = (-1 - r.Origin().X()) / r.Direction().X();
-    float tmax = (1 - r.Origin().X()) / r.Direction().X();
-
-    if (tmin > tmax) std::swap(tmin, tmax);
-
-    float tymin = (-1 - r.Origin().Y() / r.Direction().Y());
-    float tymax = (1 - r.Origin().Y() / r.Direction().Y());
-
-    if (tymin > tymax) std::swap(tymin, tymax);
-
-    if ((tmin > tymax) || (tymin > tmax))
-        return false;
-
-    if (tymin > tmin)
-        tmin = tymin;
-
-    if (tymax < tmax)
-        tmax = tymax;
-
-    float tzmin = (-1 - r.Origin().Y() / r.Direction().Y());
-    float tzmax = (1 - r.Origin().Y() / r.Direction().Y());
-
-    if (tzmin > tzmax) std::swap(tzmin, tzmax);
-
-    if ((tmin > tzmax) || (tzmin > tmax))
-        return false;
-
-    if (tzmin > tmin)
-        tmin = tzmin;
-
-    if (tzmax < tmax)
-        tmax = tzmax;
-
-    Point p;
-    p.X(r.Origin().X() + r.Direction().X() * tmin);
-    p.Y(r.Origin().Y() + r.Direction().Y() * tmin);
-    p.Z(r.Origin().Z() + r.Direction().Z() * tmin);
-    impact = localToGlobal(p);
-
-    return true;
+float Cube::interSide(const Ray &r, int dim, float offset) const {
+    float t = -1;
+    if (r.Direction()[dim] < 0.00001 && r.Direction()[dim] > -0.00001)return -1;
+    t = (offset - r.Origin()[dim]) / r.Direction()[dim];
+    if (t < 0)return -1;
+    for (int d = 0; d < 3; d++) {
+        if (d == dim)continue;
+        float x = r.Origin()[d] + t * r.Direction()[d];
+        if (x < -1 || x > 1)return -1;
+    }
+    return t;
 }
 
-Ray Cube::getNormal(const Point &p, const Point &o)  {
-    Vector dir(0, 0, 0);
-    Point oo = globalToLocal(o);
-    Point i = globalToLocal(p);
-
-    if (abs(i.X() + 1) < 0.001)
-        dir.X(-1);
-    if (abs(i.X() - 1) < 0.001)
-        dir.X(1);
-    if (abs(i.Y() + 1) < 0.001)
-        dir.Y(-1);
-    if (abs(i.Y() - 1) < 0.001)
-        dir.Y(1);
-    if (abs(i.Z() + 1) < 0.001)
-        dir.Z(-1);
-    if (abs(i.Z() - 1) < 0.001)
-        dir.Z(1);
-
-    if (oo.X() < 1 && oo.X() > -1 &&
-        oo.Y() < 1 && oo.Y() > -1 &&
-        oo.Z() < 1 && oo.Z() > -1) {
-        dir = -dir;
+bool Cube::intersect(const Ray &ray, Point &impact) {
+    Ray r = globalToLocal(ray).normalized();
+    float mint = -1;
+    float offsets[] = {-1, 1};
+    for (int d = 0; d < 3; d++) {
+        for (int o = 0; o < 2; o++) {
+            float t = interSide(r, d, offsets[o]);
+            if (t >= 0 && (mint < 0 || mint > t)) {
+                mint = t;
+            }
+        }
     }
 
-    dir = localToGlobal(dir);
-    dir = dir.normalized();
-    Ray r(p, dir);
-    return r;
+    if (mint >= 0) {
+        impact = localToGlobal(r.Origin() + (r.Direction()) * mint);
+        return true;
+    }
+
+    return false;
+}
+
+Ray Cube::getNormal(const Point &p, const Point &o) {
+    Point lp = globalToLocal(p);
+    Point lo = globalToLocal(o);
+    Vector v(0, 0, 0);
+    if (lp[0] > 0.999)v[0] = 1.0;
+    else if (lp[0] < -0.999)v[0] = -1.0;
+    else if (lp[1] > 0.999)v[1] = 1.0;
+    else if (lp[1] < -0.999)v[1] = -1.0;
+    else if (lp[2] > 0.999)v[2] = 1.0;
+    else if (lp[2] < -0.999)v[2] = -1.0;
+    if (lo[0] < 1 && lo[0] > -1 && lo[1] < 1 && lo[1] > -1 && lo[2] < 1 && lo[2] > -1)
+        return localToGlobal(Ray(lp, -v)).normalized();
+    return localToGlobal(Ray(lp, v)).normalized();
 }

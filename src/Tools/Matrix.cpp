@@ -26,7 +26,7 @@ float &Matrix::operator()(const int i, const int j) {
     return m[i * 4 + j];
 }
 
-std::array<float, 16> Matrix::identiy() const {
+std::array<float, 16> Matrix::identiy() {
     std::array<float, 4 * 4> a{};
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {

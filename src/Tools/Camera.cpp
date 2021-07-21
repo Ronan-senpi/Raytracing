@@ -7,11 +7,9 @@
 #include "Helpers/Serializer.h"
 
 Ray Camera::getRay(const float x, const float y) {
-    Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
-    Point foc(0, 0, focal);
-    r.Direction((r.Origin() - foc));
-    r = localToGlobal(r);
-    return r.normalized();
+    Vector direction(-1 + 2 * x, -1 + 2 * y, -focal);
+    Ray r(Point(0, 0, 0), direction.normalized());
+    return localToGlobal(r);
 }
 
 void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
@@ -34,7 +32,8 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
             if (nearestObj) {
                 Material m = nearestObj->getMaterial(impact);
                 Ray normal = nearestObj->getNormal(impact, r.Origin());
-                Color pixel(normal.Direction().X(), normal.Direction().Y(), normal.Direction().Z());
+                Point p = nearestObj->globalToLocal(impact);
+                Color pixel(p.X(), p.Y(), p.Z());
                 im(x, y, pixel);
             }
         }

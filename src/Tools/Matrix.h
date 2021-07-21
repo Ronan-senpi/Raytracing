@@ -14,13 +14,8 @@
 ////Matrix 4x4
 class Matrix {
 private:
-
     std::array<float, 16> m = {};
-
-    std::array<float, 16> identiy() const;
-
 public:
-
     Matrix();
 
     Matrix(const Matrix &mat);
@@ -30,6 +25,9 @@ public:
     ~Matrix() = default;
 
     std::array<float, 16> getMatrix() const;
+
+    static std::array<float, 16> identiy();
+
 
     Matrix inverse() const;
 

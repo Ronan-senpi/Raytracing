@@ -8,21 +8,24 @@
 #include "src/Tools/Camera.h"
 #include "src/Tools/Light.h"
 #include "src/Tools/Scene.h"
+#include "src/Tools/Objects/Cube.h"
+#include "src/Tools/Objects/Cylinder.h"
 
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light> lights{};
     Material m({0, 0, 1}, {0, 0, 1}, {0, 0, 1}, 0.5);
 
-    Vector trans(0, 0, -10);
-    Vector rot(0, 0, 0);
+    Vector trans(0, 0, -100);
+    Vector rot(10, 10, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
+    Cylinder *s1 = new Cylinder(trans, rot, sca, name, m);
+    std::cout << s1->getMatrix() << std::endl;
     objs.push_back(s1);
 
 
-    Camera cam(3000);
+    Camera cam(10);
     Scene scene(lights, objs, cam, "Scene1");
     scene.screenshot();
 }

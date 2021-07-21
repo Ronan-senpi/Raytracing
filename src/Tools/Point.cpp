@@ -21,10 +21,6 @@ float Point::operator[](const int i) const {
         throw std::out_of_range("0, 1 or 2");
 }
 
-float Point::norm() const {
-    return sqrt(pow(this->m_x, 2) + pow(this->m_y, 2) + pow(this->m_z, 2));
-}
-
 
 float &Point::operator[](const int i) {
     if (i == 0)

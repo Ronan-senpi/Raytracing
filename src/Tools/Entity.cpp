@@ -6,10 +6,9 @@
 
 void Entity::translate(const Vector transVec) {
     Matrix m;
-    m(0, 3) = transVec.X();
-    m(1, 3) = transVec.Y();
-    m(2, 3) = transVec.Z();
-    translation = transVec;
+    m(0, 3) = transVec[0];
+    m(1, 3) = transVec[1];
+    m(2, 3) = transVec[2];
     trans = m * trans;
     transInv = trans.inverse();
 }
@@ -55,7 +54,6 @@ void Entity::scaling(Vector factor) {
     m(0, 0) = factor.X();
     m(1, 1) = factor.Y();
     m(2, 2) = factor.Z();
-    scale = factor;
     trans = m * trans;
     transInv = trans.inverse();
 }
