@@ -4,22 +4,13 @@
 
 #include "Square.h"
 
-bool Square::intersect(const Ray &ray, Point &impact)  {
-    Ray lr = globalToLocal(ray);
-    float vz = lr.Direction().Z();
-    float oz = lr.Origin().Z();
-    float t = -1 * (-oz / vz);
-    if (t > 0) {
-        Point p;
-        p.X(lr.Origin().X() + lr.Direction().X() + t);
-        p.Y(lr.Origin().Y() + lr.Direction().Y() + t);
-        p.Z(lr.Origin().Z() + lr.Direction().Z() + t);
-        if (p.X() <= 1 && p.X() >= -1 && p.Y() <= 1 && p.Y() >= -1) {
-            impact = localToGlobal(impact);
-            return true;
-        } else
-            return false;
-    } else {
-        return false;
-    }
+bool Square::intersect(const Ray &ray, Point &impact) {
+    Ray lr = globalToLocal(ray).normalized();
+    if (lr.Direction()[2] < 0.0001 && lr.Direction()[2] > -0.0001)return false;
+    if (lr.Direction()[2] * lr.Origin()[2] > 0)return false;
+    float t = -lr.Origin()[2] / lr.Direction()[2];
+    Point p = lr.Origin() + (lr.Direction() * t);
+    if (p[0] < -1 || p[0] > 1 || p[1] < -1 || p[1] > 1)return false;
+    impact = localToGlobal(p);
+    return true;
 }

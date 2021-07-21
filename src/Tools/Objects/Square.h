@@ -9,8 +9,13 @@
 #include "../Point.h"
 
 class Square : public Plan {
-    bool intersect(const Ray &ray, Point &impact)  override;
+public:
+    Square(Vector trans, Vector rot, Vector sca, std::string n, Material m) : Plan(trans, rot, sca, n, m) {}
+
+    bool intersect(const Ray &ray, Point &impact) override;
+
+
 };
 
 
-#endif //RAYTRACING_SQUARE_H
+#endif //RAYTRACING_SQUARE_H!g hu

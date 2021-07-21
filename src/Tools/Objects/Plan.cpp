@@ -21,15 +21,10 @@ bool Plan::intersect(const Ray &ray, Point &impact) {
     }
 }
 
-Ray Plan::getNormal(const Point &p, const Point &o)  {
-    Vector dir(0, 0, 0);
-    Point oo = globalToLocal(o);
-    Point i = globalToLocal(p);
-    if (oo.Y() < 1) {
-        dir.Y(-1);
-    } else {
-        dir.Y(1);
-    }
-    Ray r(i, dir);
-    return localToGlobal(r);
+Ray Plan::getNormal(const Point &p, const Point &o) {
+    Point lp = globalToLocal(p);
+    Point lo = globalToLocal(o);
+    float z = 1;
+    if (lo[2] < 0)z = -1;
+    return localToGlobal(Ray(lp, Vector(0, 0, z))).normalized();
 }
