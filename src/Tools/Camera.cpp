@@ -33,7 +33,7 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
                 Material m = nearestObj->getMaterial(impact);
                 Ray normal = nearestObj->getNormal(impact, r.Origin());
                 Point p = nearestObj->globalToLocal(impact);
-                Color pixel(p.X(), p.Y(), p.Z());
+                Color pixel(normal.Direction()[0], normal.Direction()[1], normal.Direction()[2]);
                 im(x, y, pixel);
             }
         }

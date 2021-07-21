@@ -28,42 +28,16 @@ public:
 
     float operator[](int i) const;
 
+    float &operator[](int i);
+
     Color operator*(Color c) const;
 
     Color operator+(Color c) const;
 
     Color operator*(float factor) const;
 
-    Color &operator+=(Color c) {
-        r += c.R();
-        g += c.G();
-        b += c.B();
-        return *this;
-    }
+    Color &operator+=(Color c);
 
-    float R() const {
-        return r;
-    }
-
-    void R(float val) {
-        r = val;
-    }
-
-    float G() const {
-        return g;
-    }
-
-    void G(float val) {
-        g = val;
-    }
-
-    float B() const {
-        return b;
-    }
-
-    void B(float val) {
-        b = val;
-    }
 
     void A(float val) const {
 

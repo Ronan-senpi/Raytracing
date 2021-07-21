@@ -75,18 +75,18 @@ ImageType Image::getImageType(const std::string &filename) {
 Color Image::operator()(const int &x, const int &y) const {
     Color pixel;
     if (channel == 1) {
-        pixel.R(Serializer::serialize(data[(x * 1 * width) + (y * 1)], 0, 255));
+        pixel[0] = Serializer::serialize(data[(x * 1 * width) + (y * 1)], 0, 255);
     } else if (channel == 2) {
-        pixel.R(Serializer::serialize(data[(x * 2 * width) + (y * 2)], 0, 255));
-        pixel.G(Serializer::serialize(data[(x * 2 * width) + (y * 2) + 1], 0, 255));
+        pixel[0] = Serializer::serialize(data[(x * 2 * width) + (y * 2)], 0, 255);
+        pixel[1] = Serializer::serialize(data[(x * 2 * width) + (y * 2) + 1], 0, 255);
     } else if (channel == 3) {
-        pixel.R(Serializer::serialize(data[(x * 3 * width) + (y * 3)], 0, 255));
-        pixel.G(Serializer::serialize(data[(x * 3 * width) + (y * 3) + 1], 0, 255));
-        pixel.B(Serializer::serialize(data[(x * 3 * width) + (y * 3) + 2], 0, 255));
+        pixel[0] = Serializer::serialize(data[(x * 3 * width) + (y * 3)], 0, 255);
+        pixel[1] = Serializer::serialize(data[(x * 3 * width) + (y * 3) + 1], 0, 255);
+        pixel[2] = Serializer::serialize(data[(x * 3 * width) + (y * 3) + 2], 0, 255);
     } else if (channel == 4) {
-        pixel.R(Serializer::serialize(data[(x * 4 * width) + (y * 4)], 0, 255));
-        pixel.G(Serializer::serialize(data[(x * 4 * width) + (y * 4) + 1], 0, 255));
-        pixel.B(Serializer::serialize(data[(x * 4 * width) + (y * 4) + 2], 0, 255));
+        pixel[0] = Serializer::serialize(data[(x * 4 * width) + (y * 4)], 0, 255);
+        pixel[1] = Serializer::serialize(data[(x * 4 * width) + (y * 4) + 1], 0, 255);
+        pixel[2] = Serializer::serialize(data[(x * 4 * width) + (y * 4) + 2], 0, 255);
         pixel.A(Serializer::serialize(data[(x * 4 * width) + (y * 4) + 3], 0, 255));
     }
     return pixel;
@@ -94,18 +94,18 @@ Color Image::operator()(const int &x, const int &y) const {
 
 void Image::operator()(const int &x, const int &y, const Color &color) {
     if (channel == 1) {
-        data[(x * 1 * width) + (y * 1)] = Serializer::deserialize(color.R(), 0, 255);
+        data[(x * 1 * width) + (y * 1)] = Serializer::deserialize(color[0], 0, 255);
     } else if (channel == 2) {
-        data[(x * 2 * width) + (y * 2)] = Serializer::deserialize(color.R(), 0, 255);
-        data[(x * 2 * width) + (y * 2) + 1] = Serializer::deserialize(color.G(), 0, 255);
+        data[(x * 2 * width) + (y * 2)] = Serializer::deserialize(color[0], 0, 255);
+        data[(x * 2 * width) + (y * 2) + 1] = Serializer::deserialize(color[1], 0, 255);
     } else if (channel == 3) {
-        data[(x * 3 * width) + (y * 3)] = Serializer::deserialize(color.R(), 0, 255);
-        data[(x * 3 * width) + (y * 3) + 1] = Serializer::deserialize(color.G(), 0, 255);
-        data[(x * 3 * width) + (y * 3) + 2] = Serializer::deserialize(color.B(), 0, 255);
+        data[(x * 3 * width) + (y * 3)] = Serializer::deserialize(color[0], 0, 255);
+        data[(x * 3 * width) + (y * 3) + 1] = Serializer::deserialize(color[1], 0, 255);
+        data[(x * 3 * width) + (y * 3) + 2] = Serializer::deserialize(color[2], 0, 255);
     } else if (channel == 4) {
-        data[(x * 4 * width) + (y * 4)] = Serializer::deserialize(color.R(), 0, 255);
-        data[(x * 4 * width) + (y * 4) + 1] = Serializer::deserialize(color.G(), 0, 255);
-        data[(x * 4 * width) + (y * 4) + 2] = Serializer::deserialize(color.B(), 0, 255);
+        data[(x * 4 * width) + (y * 4)] = Serializer::deserialize(color[0], 0, 255);
+        data[(x * 4 * width) + (y * 4) + 1] = Serializer::deserialize(color[1], 0, 255);
+        data[(x * 4 * width) + (y * 4) + 2] = Serializer::deserialize(color[2], 0, 255);
         data[(x * 4 * width) + (y * 4) + 3] = Serializer::deserialize(color.A(), 0, 255);
     }
 }
