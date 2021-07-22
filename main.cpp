@@ -6,8 +6,6 @@
 #include "src/Tools/Images/Image.h"
 #include "src/Tools/Objects/Sphere.h"
 #include "src/Tools/Camera.h"
-#include "src/Tools/Light.h"
-#include "src/Tools/Scene.h"
 #include "src/Tools/Objects/Cube.h"
 #include "src/Tools/Objects/Cylinder.h"
 #include "src/Tools/Objects/Plan.h"
@@ -16,24 +14,32 @@
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light *> lights{};
-    Material m({1.0f, 0.f, 0.}, {1.f, 0.f, 0.}, {0.75f, 0.75f, 0.75}, 50);
-    Material m2({1.0f, 1.0f, 1}, {0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, 1);
+    Material m({1.0f, 0.f, 0.}, {1.f, 0.f, 0.}, {1.f, 1.f, 1.f}, 100);
+    Material m2({0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, {1.0f, 1.0f, 1}, 100);
+    Material m3({0.0f, 1.0f, 1}, {0.0f, 1.0f, 1}, {1.0f, 1.0f, 1}, 100);
+    Material m4({0.5f, 0.5f, 0.5}, {0.5f, 0.5f, 0.5f}, {1.0f, 1.0f, 1}, 100);
     Vector trans(1, 0, -10);
-    Vector trans2(0.5, 0, -10);
+    Vector trans2(-2, 0, -7);
+    Vector trans3(0, 0, -12);
     Vector rot(0.785398, 0.785398, 0);
+    Vector rot3(0.5, 0, 0.5);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
     Sphere *s1 = new Sphere(trans, rot, sca, name, m);
-    Sphere *s2 = new Sphere(trans2, rot, sca, name, m2);
+    Cube *c2 = new Cube(trans2, rot, sca, name, m2);
+    Cylinder *cy3 = new Cylinder(trans3, rot3, sca, name, m3);
+    Plan *p4 = new Plan({0, 0, -20}, {0, 0, 0}, {1, 1, 1}, name, m4);
     objs.push_back(s1);
-//    objs.push_back(s2);
+    objs.push_back(c2);
+    objs.push_back(cy3);
+    objs.push_back(p4);
     Color bg = {0, 0, 0};
     Color amb = {0.1, 0.1, 0.1};
 
-    Light *l = new Light({1, 1, 1}, {0.5, 0.5, 0.5}, {-10, 0, 0.1}, {0, 0, 0}, {1, 1, 1});
+    Light *l = new Light({1, 1, 1}, {1, 1, 1}, {-10, 10, 0.1}, {0, 0, 0}, {1, 1, 1});
     lights.push_back(l);
     Scene scene(bg, amb, lights, objs, "Scene1");
-    Camera cam(10, scene);
+    Camera cam(3, scene);
     cam.screenshot(objs, "SCENE1.jpg", 500, 500);
 
 }
