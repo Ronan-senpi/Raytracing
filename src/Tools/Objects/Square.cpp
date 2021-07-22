@@ -14,3 +14,10 @@ bool Square::intersect(const Ray &ray, Point &impact) {
     impact = localToGlobal(p);
     return true;
 }
+
+Point Square::getTextureCoordinates(const Point &p) const {
+    Point rp = globalToLocal(p);
+    float x = rp.X() / 2.f + 0.5f;
+    float y = rp.Y() / 2.f + 0.5f;
+    return Point(x, y, 0.f);
+}

@@ -1,7 +1,9 @@
 //
 // Created by rdher on 15/07/2021.
 //
+#define _USE_MATH_DEFINES // for C++
 
+#include <cmath>
 #include "Sphere.h"
 #include "../Vector.h"
 
@@ -37,4 +39,14 @@ Ray Sphere::getNormal(const Point &p, const Point &o) {
     Point lo = globalToLocal(o);
     if (Vector((lo - Point(0, 0, 0))).norm() < 1)return localToGlobal(Ray(lp, -lp)).normalized();
     return localToGlobal(Ray(lp, lp)).normalized();
+}
+
+Point Sphere::getTextureCoordinates(const Point &p) const {
+    Point lp = globalToLocal(p);
+    float rho = std::sqrt(lp.dot(lp));
+    float theta = std::atan2(lp.Y(), lp.X());
+    float sigma = std::acos(lp.Z() / rho);
+    float x = -theta / (2 * M_PI) + 0.5;
+    float y = sigma / M_PI;
+    return Point(x, y, 0);
 }

@@ -28,3 +28,16 @@ Ray Plan::getNormal(const Point &p, const Point &o) {
     if (lo[2] < 0)z = -1;
     return localToGlobal(Ray(lp, Vector(0, 0, z))).normalized();
 }
+
+Point Plan::getTextureCoordinates(const Point &p) const {
+    Point lp = globalToLocal(p);
+    float x = lp.X() - (int) lp.X();
+    float y = lp.Y() - (int) lp.Y();
+
+    if (x < 0)
+        x += 1;
+    if (y < 0)
+        y += 1;
+
+    return Point(x, y, 0);
+}

@@ -14,7 +14,7 @@ public:
 
     bool intersect(const Ray &ray, Point &impact) override;
 
-
+    Point getTextureCoordinates(const Point &p) const override;
 };
 
 

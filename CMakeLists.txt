@@ -46,8 +46,13 @@ add_executable(Raytracing main.cpp
         src/Tools/Helpers/StringHelpers.cpp
         src/Tools/Helpers/StringHelpers.h
         src/Tools/Camera.cpp
-        src/Tools/Camera.h src/Tools/Helpers/Serializer.h)
+        src/Tools/Camera.h
+        src/Tools/Helpers/Serializer.h
+        src/Tools/Objects/Include.h)
 
 target_include_directories(Raytracing PRIVATE
         "Libraries/opencv/build/include"
         "Libraries/stb")
+
+add_custom_command(TARGET Raytracing PRE_BUILD
+        COMMAND robocopy ${PROJECT_SOURCE_DIR}/resources/ ${PROJECT_BINARY_DIR}/resources /E /NS /NC /NFL /NDL /NP /NJH /NJS || cmd /c "exit /b 0")

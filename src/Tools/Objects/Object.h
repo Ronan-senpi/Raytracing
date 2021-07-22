@@ -24,13 +24,17 @@ public:
 
     ~Object() = default;
 
-    //Point getTextureCoordinates(const Point &p) const = 0;
+    virtual Point getTextureCoordinates(const Point &p) const = 0;
 
     virtual Ray getNormal(const Point &p, const Point &o) = 0;
 
     virtual bool intersect(const Ray &ray, Point &impact) = 0;
 
     Material getMaterial(const Point &p) const;
+
+    bool hasTexture() const {
+        return mat.hasTexture();
+    }
 
     void material(Material m) {
         mat = m;

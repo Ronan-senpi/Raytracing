@@ -8,15 +8,18 @@
 #include "Object.h"
 
 class Cube : public Object {
-public:
+private:
+    float interSide(const Ray &r, int dim, float offset) const;
 
+public:
     Cube(Vector trans, Vector rot, Vector sca, std::string n, Material m) : Object(trans, rot, sca, n, m) {}
 
     bool intersect(const Ray &ray, Point &impact) override;
 
     Ray getNormal(const Point &p, const Point &o) override;
 
-    float interSide(const Ray &r, int dim, float offset) const;
+    Point getTextureCoordinates(const Point &p) const override;
+
 };
 
 

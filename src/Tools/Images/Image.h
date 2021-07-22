@@ -64,6 +64,8 @@ public:
 
     Color operator()(const int &x, const int &y) const;
 
+    Color operator()(const float &x, const float &y) const;
+
     void operator()(const int &x, const int &y, const Color &color);
 
     /**
@@ -74,11 +76,11 @@ public:
     static ImageType getImageType(const std::string &filename);
 
     // Begin : assessor
-    inline int getWidth() const {
+    int getWidth() const {
         return width;
     }
 
-    inline int getHeight() const {
+    int getHeight() const {
         return height;
     }
 

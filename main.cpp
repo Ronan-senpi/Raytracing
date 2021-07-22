@@ -4,20 +4,27 @@
 #include "src/Tools/Vector.h"
 #include "src/Tools/Entity.h"
 #include "src/Tools/Images/Image.h"
-#include "src/Tools/Objects/Sphere.h"
 #include "src/Tools/Camera.h"
-#include "src/Tools/Objects/Cube.h"
-#include "src/Tools/Objects/Cylinder.h"
-#include "src/Tools/Objects/Plan.h"
-#include "src/Tools/Objects/Square.h"
+#include "src/Tools/Objects/Include.h"
 
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light *> lights{};
-    Material m({1.0f, 0.f, 0.}, {1.f, 0.f, 0.}, {1.f, 1.f, 1.f}, 100);
-    Material m2({0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, {1.0f, 1.0f, 1}, 100);
+    std::shared_ptr<Image> TposeTexture = std::make_shared<Image>("resources/tpose.jpg");
+    std::shared_ptr<Image> senTexture = std::make_shared<Image>("resources/sen.png");
+    std::shared_ptr<Image> skyboxTexture = std::make_shared<Image>("resources/hakone-shrine.jpg");
+
+    Material m(senTexture, {1.0f, 0.f, 0.}, {1.f, 0.f, 0.}, {1.f, 1.f, 1.f}, 100);
+    Material m2(TposeTexture,
+                {0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, {1.0f, 1.0f, 1}, 100);
     Material m3({0.0f, 1.0f, 1}, {0.0f, 1.0f, 1}, {1.0f, 1.0f, 1}, 100);
     Material m4({0.5f, 0.5f, 0.5}, {0.5f, 0.5f, 0.5f}, {1.0f, 1.0f, 1}, 100);
+    Material mTex(TposeTexture,
+                  {0.0f, 0.0f, 1},
+                  {0.0f, 0.0f, 1},
+                  {1.0f, 1.0f, 1},
+                  100);
+    Material skyboxMat(skyboxTexture, {1, 1, 1}, {1, 1, 1}, {1, 1, 1}, 0.1);
     Vector trans(1, 0, -10);
     Vector trans2(-2, 0, -7);
     Vector trans3(0, 0, -12);
@@ -28,18 +35,33 @@ int main() {
     Sphere *s1 = new Sphere(trans, rot, sca, name, m);
     Cube *c2 = new Cube(trans2, rot, sca, name, m2);
     Cylinder *cy3 = new Cylinder(trans3, rot3, sca, name, m3);
+    Square *squ = new Square({2, 0, -6},
+                             {0, 0, 0},
+                             {1, 1, 1},
+                             "Square",
+                             mTex);
     Plan *p4 = new Plan({0, 0, -20}, {0, 0, 0}, {1, 1, 1}, name, m4);
+
+    Sphere *skybox = new Sphere(
+            {0, 0, 0},
+            {0, 0, 0},
+            {20, 20, 20},
+            "Skybox",
+            skyboxMat
+    );
     objs.push_back(s1);
     objs.push_back(c2);
     objs.push_back(cy3);
     objs.push_back(p4);
+    objs.push_back(skybox);
+//    objs.push_back(squ);
     Color bg = {0, 0, 0};
     Color amb = {0.1, 0.1, 0.1};
 
     Light *l = new Light({1, 1, 1}, {1, 1, 1}, {-10, 10, 0.1}, {0, 0, 0}, {1, 1, 1});
     lights.push_back(l);
     Scene scene(bg, amb, lights, objs, "Scene1");
-    Camera cam(3, scene);
+    Camera cam(1, scene);
     cam.screenshot(objs, "SCENE1.jpg", 500, 500);
 
 }

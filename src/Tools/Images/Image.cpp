@@ -26,7 +26,6 @@ Image::Image(const std::string &filename) {
 }
 
 Image::Image(const Image &img) : Image(img.getWidth(), img.getHeight()) {
-
     data = new uint8_t[img.getSize()];
     for (int i = 0; i < img.getSize(); ++i) {
         data[i] = img.getData()[i];
@@ -90,6 +89,10 @@ Color Image::operator()(const int &x, const int &y) const {
         pixel.A(Serializer::serialize(data[(x * 4 * width) + (y * 4) + 3], 0, 255));
     }
     return pixel;
+}
+
+Color Image::operator()(const float &x, const float &y) const {
+    return (*this)(Serializer::deserialize(x, 0, width), Serializer::deserialize(y, 0, height));
 }
 
 void Image::operator()(const int &x, const int &y, const Color &color) {

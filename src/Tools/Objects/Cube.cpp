@@ -51,4 +51,16 @@ Ray Cube::getNormal(const Point &p, const Point &o) {
     if (lo[0] < 1 && lo[0] > -1 && lo[1] < 1 && lo[1] > -1 && lo[2] < 1 && lo[2] > -1)
         return localToGlobal(Ray(lp, -v)).normalized();
     return localToGlobal(Ray(lp, v)).normalized();
+
+}
+
+Point Cube::getTextureCoordinates(const Point &p) const {
+    Point lp = globalToLocal(p);
+    if (lp.X() > 0.999 || lp.X() < -0.999)
+        return Point(lp.Z() / 2 + 0.5, lp.Y() / 2 + 0.5, 0);
+    if (lp.Y() > 0.999 || lp.Y() < -0.999)
+        return Point(lp.X() / 2 + 0.5, lp.Z() / 2 + 0.5, 0);
+    if (lp.Z() > 0.999 || lp.Z() < -0.999)
+        return Point(lp.X() / 2 + 0.5, lp.Y() / 2 + 0.5, 0);
+    return Point(0, 0, 0);
 }

@@ -15,6 +15,7 @@ public:
 
     Ray getNormal(const Point &p, const Point &o) override;
 
+    Point getTextureCoordinates(const Point &p) const override;
 };
 
 

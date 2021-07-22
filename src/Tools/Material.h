@@ -8,20 +8,21 @@
 #include "Color.h"
 #include "Ray.h"
 #include "Point.h"
-
-class Object;
-
-class Scene;
+#include "Images/Image.h"
 
 class Material {
 private:
     Color ka, kd, ks;
+    std::shared_ptr<Image> texture;
     float shininess;
 public:
 
     Material() = default;
 
     Material(Color kam, Color kdiff, Color kspec, float shin) : ka(kam), kd(kdiff), ks(kspec), shininess(shin) {}
+
+    Material(std::shared_ptr<Image> tex, Color kam, Color kdiff, Color kspec, float shin)
+            : texture(tex), ka(kam), kd(kdiff), ks(kspec), shininess(shin) {}
 
     ~Material() = default;
 
@@ -57,6 +58,18 @@ public:
         return ks;
     }
 
+    bool hasTexture() const {
+        return texture != nullptr;
+    }
+
+    std::shared_ptr<Image> getTexture() const {
+        return texture;
+    }
+
+    Color getTexture(const Point &coordinate) const {
+
+        return (*texture)(1 - coordinate[1], coordinate[0]);
+    }
 };
 
 

@@ -67,6 +67,7 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
     Material m = obj->getMaterial(impact);
     Ray normal = obj->getNormal(impact, ray.Origin());
     Color c = m.Ka() * scene.getAmbiant();
+
     for (int l = 0; l < scene.nbLights(); l++) {
         const Light *light = scene.getLight(l);
         Vector lv = light->getVectorToLight(impact);
@@ -79,10 +80,12 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
         if (beta > 0)
             c += light->is() * m.Ks() * pow(beta, m.Shininess());
     }
-
+    if (obj->hasTexture()) {
+        Point texCoordinate = obj->getTextureCoordinates(impact);
+        Color texColor = m.getTexture(texCoordinate);
+        c = c * texColor;
+    }
     return c;
-
-
 }
 
 
