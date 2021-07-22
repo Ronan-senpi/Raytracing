@@ -21,9 +21,10 @@ private:
 public:
     Scene() = default;
 
-    Scene(std::vector<Light *> li, std::vector<Object *> obj, std::string name) : lights(std::move(li)),
-                                                                                  objects(std::move(obj)),
-                                                                                  name(std::move(name)) {};
+    Scene(const Color &background, const Color &ambiance, std::vector<Light *> li, std::vector<Object *> obj,
+          std::string name) : bgColor(background), ambiantColor(ambiance), lights(std::move(li)),
+                              objects(std::move(obj)),
+                              name(std::move(name)) {};
 
     /**
      * retourne un pointeur vers l'objet intersecté par le rayon passé en paramètre le plus proche,

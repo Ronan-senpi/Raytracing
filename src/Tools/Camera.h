@@ -17,7 +17,7 @@ private:
     float focal;
     Scene scene;
 
-    bool CloserThan(const Point &oldPoint, const Point &newPoint);
+    bool CloserThan(const Point &oldImpact, const Point &newImpact) const;
 
 public:
     Camera() = default;
@@ -30,7 +30,7 @@ public:
 
     Ray getRay(float x, float y);
 
-    void screenshot(const std::vector<Object *> &objects, const std::string &filename, int h, int w);
+    void screenshot(const std::vector<Object *> &objects, const std::string &filename, int w, int h);
 
     Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
 };

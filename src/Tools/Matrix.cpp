@@ -170,14 +170,16 @@ std::array<float, 16> Matrix::getMatrix() const {
 }
 
 Matrix Matrix::operator*(const Matrix &mult) const {
-    std::array<float, 16> arr{};
+    const Matrix &m = (*this);
+    Matrix res;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            arr[i * 4 + j] = m[i * 4] * mult.getMatrix()[j] + m[i * 4 + 1] * mult.getMatrix()[1 * 4 + j] +
-                             m[i * 4 + 2] * mult.getMatrix()[2 * 4 + j] + m[i * 4 + 3] * mult.getMatrix()[3 * 4 + j];
+            res(i, j) = m(i, 0) * mult(0, j) + m(i, 1) * mult(1, j) +
+                        m(i, 2) * mult(2, j) + m(i, 3) * mult(3, j);
         }
     }
-    return Matrix(arr);
+
+    return res;
 }
 
 Matrix Matrix::operator*(const float &f) const {

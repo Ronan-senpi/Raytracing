@@ -18,7 +18,8 @@ private:
 public:
     Light() : Entity() {};
 
-    Light(Color i, Point pos, Vector rot, Vector sca) : _is(i), Entity(pos, rot, sca) {};
+    Light(Color idiff, Color ispec, Point pos, Vector rot, Vector sca) : _id(idiff), _is(ispec),
+                                                                         Entity(pos, rot, sca) {};
 
     Color id() const {
         return _id;
@@ -33,14 +34,14 @@ public:
      * @param p Origine du ray
      * @return
      */
-    Ray getRayToLight(const Point &p) const;
+//    Ray getRayToLight(const Point &p) const;
 
     /**
      * Retourne un Ray partant de la lumière et orienté vers le Point passé en paramètre.
      * @param p Arrivée du ray
      * @return
      */
-    Ray getRayFromLight(const Point &p) const;
+//    Ray getRayFromLight(const Point &p) const;
 
     /**
      * Retourne un Vector orienté du Point passé en paramètre vers la lumière.
@@ -54,7 +55,7 @@ public:
      * @param p "Arrivée" du vector
      * @return
      */
-    Vector getVectorFromLight(const Point &p) const;
+//    Vector getVectorFromLight(const Point &p) const;
 };
 
 

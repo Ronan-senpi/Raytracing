@@ -4,20 +4,20 @@
 
 #include "Light.h"
 
-Ray Light::getRayToLight(const Point &p) const {
-    return {p, getVectorToLight(p)};
-}
+//Ray Light::getRayToLight(const Point &p) const {
+//    return {p, getVectorToLight(p)};
+//}
 
-Ray Light::getRayFromLight(const Point &p) const {
-    //return {translation, getVectorFromLight(p)};
-    return Ray(0, 0, 0, 0, 0, 0);
-}
+//Ray Light::getRayFromLight(const Point &p) const {
+//    //return {translation, getVectorFromLight(p)};
+//    return Ray(0, 0, 0, 0, 0, 0);
+//}
 
 Vector Light::getVectorToLight(const Point &p) const {
-    return Vector(p - position()).normalized();
+    return Vector(position()).normalized() - p;
 }
 
-Vector Light::getVectorFromLight(const Point &p) const {
-    //return Vector(translation - p).normalized();
-    return Vector();
-}
+//Vector Light::getVectorFromLight(const Point &p) const {
+//    //return Vector(translation - p).normalized();
+//    return Vector();
+//}
