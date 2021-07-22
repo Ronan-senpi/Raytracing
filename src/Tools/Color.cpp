@@ -44,9 +44,9 @@ Color Color::operator*(float factor) const {
 }
 
 Color &Color::operator+=(Color c) {
-    r += c[0];
-    g += c[1];
-    b += c[2];
+    this->r = std::clamp(r + c[0], 0.f, 1.0f);
+    this->g = std::clamp(g + c[1], 0.0f, 1.0f);
+    this->b = std::clamp(b + c[2], 0.0f, 1.0f);
     return *this;
 }
 

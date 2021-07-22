@@ -20,11 +20,9 @@ public:
     Color(const Color &c) = default;
 
     Color(const Point &p) {
-        this->r = Serializer::serialize(p[0], 0.0f, 1.0f);
-        this->g = Serializer::serialize(p[1], 0.0f, 1.0f);
-        this->b = Serializer::serialize(p[2], 0.0f, 1.0f);
-//        std::cout << "raw (" << p[0] << "," << p[1] << "," << p[2] << ")" << std::endl;
-//        std::cout << "serialize (" << this->r << "," << this->g << "," << this->b << ")" << std::endl;
+        this->r = std::clamp(p[0], 0.f, 1.0f);
+        this->g = std::clamp(p[1], 0.0f, 1.0f);
+        this->b = std::clamp(p[2], 0.0f, 1.0f);
 
     }
 

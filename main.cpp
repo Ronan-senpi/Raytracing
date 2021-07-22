@@ -16,21 +16,21 @@
 int main() {
     std::vector<Object *> objs{};
     std::vector<Light *> lights{};
-    Material m({1.0f, 0.0f, 0}, {1.0f, 0.0f, 0}, {1.0f, 0.0f, 0}, 1);
+    Material m({1.0f, 0.f, 0.}, {1.f, 0.f, 0.}, {0.75f, 0.75f, 0.75}, 50);
     Material m2({1.0f, 1.0f, 1}, {0.0f, 0.0f, 1}, {0.0f, 0.0f, 1}, 1);
     Vector trans(1, 0, -10);
     Vector trans2(0.5, 0, -10);
     Vector rot(0.785398, 0.785398, 0);
     Vector sca(1, 1, 1);
     std::string name = "Sphere1";
-    Cube *s1 = new Cube(trans, rot, sca, name, m);
+    Sphere *s1 = new Sphere(trans, rot, sca, name, m);
     Sphere *s2 = new Sphere(trans2, rot, sca, name, m2);
     objs.push_back(s1);
 //    objs.push_back(s2);
-    Color bg = {0.5, 0.5, 0.5};
-    Color amb = {1, 1, 1};
+    Color bg = {0, 0, 0};
+    Color amb = {0.1, 0.1, 0.1};
 
-    Light *l = new Light({1, 1, 1}, {1, 1, 1}, {-5, 0, 0.1}, {0, 0, 0}, {1, 1, 1});
+    Light *l = new Light({1, 1, 1}, {0.5, 0.5, 0.5}, {-10, 0, 0.1}, {0, 0, 0}, {1, 1, 1});
     lights.push_back(l);
     Scene scene(bg, amb, lights, objs, "Scene1");
     Camera cam(10, scene);

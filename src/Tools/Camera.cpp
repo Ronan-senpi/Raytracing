@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "Images/Image.h"
 #include "Helpers/Serializer.h"
+#include <algorithm>
+#include <iostream>
 
 Ray Camera::getRay(const float x, const float y) {
     Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
@@ -32,8 +34,9 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
                 }
             }
             if (nearestObj) {
+                Ray normal = nearestObj->getNormal(nearestImpact, r.Origin());
                 Color pixel = getImpactColor(r, nearestObj, nearestImpact);
-//                Color pixel = nearestObj->getNormal(nearestImpact, r.Origin()).Direction();
+//                Color pixel(normal.Direction()[0], normal.Direction()[1], normal.Direction()[2]);
                 im(h - y - 1, x, pixel);
             }
         }
@@ -49,6 +52,18 @@ Camera::CloserThan(const Point &oldImpact, const Point &newImpact) const {
 }
 
 Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
+//    Material m = obj->getMaterial(impact);
+//    Ray normal = obj->getNormal(impact, ray.Origin());
+//    Color c = m.Ka() * scene.getAmbiant();
+//
+//    for (int l = 0; l < scene.nbLights(); l++) {
+//        const Light *light = scene.getLight(l);
+//        Vector lv = light->getVectorToLight(impact);
+//        float alpha = lv.dot(normal.Direction());
+//        alpha = alpha < 0 ? 0 : alpha;
+//        c += light->id() * m.Kd() * alpha;
+//    }
+//    return c;
     Material m = obj->getMaterial(impact);
     Ray normal = obj->getNormal(impact, ray.Origin());
     Color c = m.Ka() * scene.getAmbiant();
@@ -60,13 +75,14 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
             c += light->id() * m.Kd() * alpha;
 
         Vector rm = (normal.Direction() * (lv.dot(normal.Direction() * 2))) - lv;
-
         float beta = -rm.dot(ray.Direction());
         if (beta > 0)
             c += light->is() * m.Ks() * pow(beta, m.Shininess());
     }
 
     return c;
+
+
 }
 
 

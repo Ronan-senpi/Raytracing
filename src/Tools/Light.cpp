@@ -14,7 +14,7 @@
 //}
 
 Vector Light::getVectorToLight(const Point &p) const {
-    return Vector(position()).normalized() - p;
+    return Vector((position() - p)).normalized();
 }
 
 //Vector Light::getVectorFromLight(const Point &p) const {
