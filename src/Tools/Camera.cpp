@@ -7,6 +7,7 @@
 #include "Helpers/Serializer.h"
 #include <algorithm>
 #include <iostream>
+#include <omp.h>
 
 Ray Camera::getRay(const float x, const float y) {
     Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
@@ -19,6 +20,8 @@ Ray Camera::getRay(const float x, const float y) {
 void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
                         const int w, const int h) {
     Image im(w, h, scene.getBackground());
+
+#pragma omp parallel for
     for (int x = 0; x < w; ++x) {
         for (int y = 0; y < h; ++y) {
             Ray r = getRay(Serializer::serialize(x, 0, w - 1), Serializer::serialize(y, 0, h - 1));

@@ -8,6 +8,8 @@
 #include "src/Tools/Objects/Include.h"
 
 int main() {
+
+    std::time_t start = time(0);
     std::vector<Object *> objs{};
     std::vector<Light *> lights{};
     std::shared_ptr<Image> TposeTexture = std::make_shared<Image>("resources/tpose.jpg");
@@ -64,6 +66,9 @@ int main() {
     Camera cam(1, scene);
     cam.screenshot(objs, "SCENE1.jpg", 500, 500);
 
+    std::time_t end = time(0);
+    double seconds = difftime(end, start);
+    std::cout << "execution time" + std::to_string(seconds) << std::endl;
 }
 
 
