@@ -54,8 +54,8 @@ find_package(OpenMP)
 
 
 target_include_directories(Raytracing PRIVATE
-        "Libraries/opencv/build/include"
-        "Libraries/stb")
+        "Libraries/stb"
+        "Libraries/nlohmann")
 
 if (OPENMP_FOUND)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")

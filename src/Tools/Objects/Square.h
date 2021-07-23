@@ -12,6 +12,8 @@ class Square : public Plan {
 public:
     Square(Vector trans, Vector rot, Vector sca, std::string n, Material m) : Plan(trans, rot, sca, n, m) {}
 
+    Square(Vector trans, Vector rot, Vector sca, Material m) : Plan(trans, rot, sca, m) {}
+
     bool intersect(const Ray &ray, Point &impact) override;
 
     Point getTextureCoordinates(const Point &p) const override;

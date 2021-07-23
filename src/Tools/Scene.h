@@ -68,6 +68,14 @@ public:
     Light *getLight(int i) const {
         return lights[i];
     }
+
+    std::vector<Object *> getObjects() const {
+        return objects;
+    }
+
+    std::string getName() const {
+        return name;
+    }
 };
 
 

@@ -17,18 +17,19 @@ Ray Camera::getRay(const float x, const float y) {
     return r.normalized();
 }
 
-void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
-                        const int w, const int h) {
-    Image im(w, h, scene.getBackground());
+//void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
+//                        const int w, const int h) {
+void Camera::screenshot() {
+    Image im(height, height, scene.getBackground());
 
 #pragma omp parallel for
-    for (int x = 0; x < w; ++x) {
-        for (int y = 0; y < h; ++y) {
-            Ray r = getRay(Serializer::serialize(x, 0, w - 1), Serializer::serialize(y, 0, h - 1));
+    for (int x = 0; x < height; ++x) {
+        for (int y = 0; y < height; ++y) {
+            Ray r = getRay(Serializer::serialize(x, 0, height - 1), Serializer::serialize(y, 0, height - 1));
             Point impact;
             Point nearestImpact;
             Object *nearestObj = nullptr;
-            for (Object *o : objects) {
+            for (Object *o : scene.getObjects()) {
                 if (o->intersect(r, impact)) {
                     if (!nearestObj || this->CloserThan(nearestImpact, impact)) {
                         nearestObj = o;
@@ -40,11 +41,11 @@ void Camera::screenshot(const std::vector<Object *> &objects, const std::string 
                 Ray normal = nearestObj->getNormal(nearestImpact, r.Origin());
                 Color pixel = getImpactColor(r, nearestObj, nearestImpact);
 //                Color pixel(normal.Direction()[0], normal.Direction()[1], normal.Direction()[2]);
-                im(h - y - 1, x, pixel);
+                im(height - y - 1, x, pixel);
             }
         }
     }
-    im.write(filename);
+    im.write(scene.getName() + ".jpg");
 }
 
 bool

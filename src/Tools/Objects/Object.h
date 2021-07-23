@@ -22,6 +22,8 @@ public:
     Object(Vector trans, Vector rot, Vector sca, std::string n, Material m) : name(std::move(n)), mat(m),
                                                                               Entity(trans, rot, sca) {}
 
+    Object(Vector trans, Vector rot, Vector sca, Material m) : mat(m), Entity(trans, rot, sca) {}
+
     ~Object() = default;
 
     virtual Point getTextureCoordinates(const Point &p) const = 0;
