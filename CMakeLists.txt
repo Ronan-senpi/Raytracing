@@ -48,7 +48,9 @@ add_executable(Raytracing main.cpp
         src/Tools/Camera.cpp
         src/Tools/Camera.h
         src/Tools/Helpers/Serializer.h
-        src/Tools/Objects/Include.h)
+        src/Tools/Objects/Include.h
+        src/Tools/json/SpoonfeederJson.cpp
+        src/Tools/json/SpoonfeederJson.h)
 
 find_package(OpenMP)
 

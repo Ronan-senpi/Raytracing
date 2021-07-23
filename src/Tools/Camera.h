@@ -29,6 +29,7 @@ public:
     Camera(const float &foc,
            const int &h,
            Scene sce,
+
            const Point &pos,
            const Vector &rot)
             : focal(foc),
