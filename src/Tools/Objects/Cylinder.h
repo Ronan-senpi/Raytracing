@@ -11,7 +11,7 @@ class Cylinder : public Object {
 public:
     Cylinder(Vector trans, Vector rot, Vector sca, std::string n, Material m) : Object(trans, rot, sca, n, m) {}
 
-    Cylinder(Vector trans, Vector rot, Vector sca, Material m) : Object(trans, rot, sca, m) {}
+    Cylinder(Vector trans, Vector rot, Vector sca, Material m) : Object(trans, rot, sca, "cube", m) {}
 
     bool intersect(const Ray &ray, Point &impact) override;
 

@@ -3,11 +3,7 @@
 //
 
 #include "Camera.h"
-#include "Images/Image.h"
-#include "Helpers/Serializer.h"
-#include <algorithm>
 #include <iostream>
-#include <omp.h>
 
 Ray Camera::getRay(const float x, const float y) {
     Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);

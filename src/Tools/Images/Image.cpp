@@ -92,7 +92,7 @@ Color Image::operator()(const int &x, const int &y) const {
 }
 
 Color Image::operator()(const float &x, const float &y) const {
-    return (*this)(Serializer::deserialize(x, 0, width), Serializer::deserialize(y, 0, height));
+    return (*this)(Serializer::deserialize(x, 0, height - 1), Serializer::deserialize(y, 0, width - 1));
 }
 
 void Image::operator()(const int &x, const int &y, const Color &color) {

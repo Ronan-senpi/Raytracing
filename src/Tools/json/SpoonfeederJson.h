@@ -24,7 +24,7 @@ class SpoonfeederJson {
 public:
     SpoonfeederJson() {
         //Get json values
-        std::ifstream config_file("resources/config.json", std::ifstream::binary);
+        std::ifstream config_file("../resources/config-test.json", std::ifstream::binary);
         json j = json::parse(config_file);
 
         //Make images
@@ -37,11 +37,19 @@ public:
         //Make scene
         std::vector<std::shared_ptr<Camera>> cameras = prepareCamera(j["scenes"], materials, skybox);
 
+
         if (cameras.empty()) {
             std::cout << "Acune scene n'a été charger verifier le fichier config.json" << std::endl;
             return;
         }
 
+        int i = 0;
+        for (auto &cam: cameras) {
+            cam->screenshot(std::to_string(i), 500, false);
+            ++i;
+        }
+
+        return;
         bool shadows = false;
         std::string tmp;
         int sceneId;
@@ -262,7 +270,7 @@ private :
                                    {1, 1, 1},
                                    {1, 1, 1}, 0.1);
                 objs.push_back(new Sphere(
-                        {0, 0, 0},
+                        {0, 0, -40},
                         {0, 0, 0},
                         {20, 20, 20},
                         skyboxMat));
