@@ -34,9 +34,7 @@ void Camera::screenshot(const std::string &name, const int &height, const bool &
                 }
             }
             if (nearestObj) {
-//                Ray normal = nearestObj->getNormal(nearestImpact, r.Origin());
                 Color pixel = getImpactColor(r, nearestObj, nearestImpact);
-//                Color pixel(normal.Direction()[0], normal.Direction()[1], normal.Direction()[2]);
                 im(height - y - 1, x, pixel);
             }
         }
@@ -51,9 +49,9 @@ Camera::CloserThan(const Point &oldImpact, const Point &newImpact) const {
     return newDistance < oldDistance;
 }
 
-Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, int matId) {
+Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
 
-    Material m = obj->getMaterial(impact, matId);
+    Material m = obj->getMaterial(impact);
     Ray normal = obj->getNormal(impact, ray.Origin());
     Color c = m.Ka() * scene.getAmbiant();
 
@@ -69,7 +67,7 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, i
         if (beta > 0)
             c += light->is() * m.Ks() * pow(beta, m.Shininess());
     }
-    if (obj->hasTexture()) {
+    if (m.hasTexture()) {
         Point texCoordinate = obj->getTextureCoordinates(impact);
         Color texColor = m.getTexture(texCoordinate);
         c = c * texColor;

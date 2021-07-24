@@ -134,6 +134,7 @@ private :
     std::vector<Object *> makeObjects(const json &objs,
                                       const std::vector<Material> &mats) {
         std::vector<Object *> l;
+        std::vector<Material> matToAdd;
         for (const auto &obj : objs) {
             Vector trans(obj["trans"]["x"],
                          obj["trans"]["y"],
@@ -146,12 +147,13 @@ private :
             Vector sca(obj["sca"]["x"],
                        obj["sca"]["y"],
                        obj["sca"]["z"]);
-
+            int matId = 0;
             for (const int &mat : obj["matId"]) {
-                int matId = obj["matId"];
+                matId = obj["matId"];
+                matToAdd.push_back(mats[matId]);
             }
 
-            l.push_back(new T(trans, rot, sca, mats[matId]));
+            l.push_back(new T(trans, rot, sca, mats));
 
         }
         return l;
@@ -270,12 +272,14 @@ private :
                                    {1, 1, 1},
                                    {1, 1, 1},
                                    {1, 1, 1}, 0.1);
+                std::vector<Material> mats;
+                mats.push_back(skyboxMat);
                 objs.push_back(new Sphere(
                         trans,
                         {1.5708, 0, 0},
                         {20, 20, 20},
                         "skybox",
-                        skyboxMat));
+                        mats));
             }
             ///End: Skybox
 

@@ -46,7 +46,7 @@ public:
 
     void screenshot(const std::string &name, const int &height, const bool &shadows);
 
-    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact, int matId);
+    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
 };
 
 

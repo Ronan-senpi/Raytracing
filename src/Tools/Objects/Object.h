@@ -18,6 +18,7 @@ class Object : public Entity {
 private:
     std::string name;
     std::vector<Material> mats;
+    int nbImpact;
 public:
     Object() = default;
 
@@ -36,7 +37,7 @@ public:
 
     virtual bool intersect(const Ray &ray, Point &impact) = 0;
 
-    Material getMaterial(const Point &p, int matId) const;
+    Material getMaterial(const Point &p)const;
 
     bool hasTexture(int id) const {
         return mats[id].hasTexture();
