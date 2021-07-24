@@ -147,13 +147,11 @@ private :
             Vector sca(obj["sca"]["x"],
                        obj["sca"]["y"],
                        obj["sca"]["z"]);
-            int matId = 0;
-            for (const int &mat : obj["matId"]) {
-                matId = obj["matId"];
-                matToAdd.push_back(mats[matId]);
+            for (const int &mat : obj["matIds"]) {
+                matToAdd.push_back(mats[mat]);
             }
 
-            l.push_back(new T(trans, rot, sca, mats));
+            l.push_back(new T(trans, rot, sca, matToAdd));
 
         }
         return l;

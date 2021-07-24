@@ -3,8 +3,6 @@
     "resources/earth.png"
   ],
   "Textures": [
-    "resources/earth.png",
-    "resources/hakone-shrine.jpg",
     "resources/tpose.jpg",
     "resources/sen.png"
   ],
@@ -137,7 +135,9 @@
               "y": 1,
               "z": 1
             },
-            "matId": 1
+            "matIds": [
+              1
+            ]
           }
         ],
         "cylinders": [
@@ -157,7 +157,9 @@
               "y": 1,
               "z": 1
             },
-            "matId": 1
+            "matIds": [
+              1
+            ]
           }
         ],
         "plans": [],
@@ -178,7 +180,9 @@
               "y": 1,
               "z": 1
             },
-            "matId": 0
+            "matIds": [
+              0
+            ]
           }
         ],
         "squares": []
@@ -198,6 +202,33 @@
           "trans": {
             "x": -10,
             "y": 10,
+            "z": 0.1
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "sca": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        },
+        {
+          "id": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "is": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "trans": {
+            "x": -10,
+            "y": -10,
             "z": 0.1
           },
           "rot": {
@@ -258,7 +289,9 @@
               "y": 1,
               "z": 1
             },
-            "matId": 0
+            "matIds": [
+              0
+            ]
           }
         ],
         "cylinders": [
@@ -278,7 +311,9 @@
               "y": 1,
               "z": 1
             },
-            "matId": 1
+            "matIds": [
+              1
+            ]
           }
         ],
         "plans": [],
@@ -299,7 +334,10 @@
               "y": 1,
               "z": 1
             },
-            "matId": 1
+            "matIds": [
+              1,
+              2
+            ]
           }
         ],
         "squares": []
