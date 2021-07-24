@@ -7,22 +7,26 @@
 
 #include <string>
 #include <utility>
+#include <vector>
 #include "../Entity.h"
 #include "../Point.h"
 #include "../Material.h"
 #include "../Ray.h"
 
+
 class Object : public Entity {
 private:
     std::string name;
-    Material mat;
+    std::vector<Material> mats;
 public:
     Object() = default;
 
-    Object(Vector trans, Vector rot, Vector sca, std::string n, Material m) : name(std::move(n)), mat(m),
-                                                                              Entity(trans, rot, sca) {}
+    Object(Vector trans, Vector rot, Vector sca, std::string n, std::vector<Material> m) : name(std::move(n)),
+                                                                                           mats(std::move(m)),
+                                                                                           Entity(trans, rot, sca) {}
 
-    Object(Vector trans, Vector rot, Vector sca, Material m) : mat(m), Entity(trans, rot, sca) {}
+    Object(Vector trans, Vector rot, Vector sca, std::vector<Material> m) : mats(std::move(m)),
+                                                                            Entity(trans, rot, sca) {}
 
     ~Object() = default;
 
@@ -32,14 +36,18 @@ public:
 
     virtual bool intersect(const Ray &ray, Point &impact) = 0;
 
-    Material getMaterial(const Point &p) const;
+    Material getMaterial(const Point &p, int matId) const;
 
-    bool hasTexture() const {
-        return mat.hasTexture();
+    bool hasTexture(int id) const {
+        return mats[id].hasTexture();
+    }
+
+    int nbMat() const {
+        return mats.size();
     }
 
     void material(Material m) {
-        mat = m;
+        mats.push_back(m);
     }
 };
 

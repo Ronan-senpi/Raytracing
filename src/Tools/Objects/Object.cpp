@@ -8,6 +8,6 @@
 //    return Point(0, 0, 0);
 //}
 
-Material Object::getMaterial(const Point &p) const {
-    return mat;
+Material Object::getMaterial(const Point &p, int matId) const {
+    return mats[matId];
 }

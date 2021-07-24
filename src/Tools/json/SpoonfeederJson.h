@@ -147,12 +147,11 @@ private :
                        obj["sca"]["y"],
                        obj["sca"]["z"]);
 
-            if (obj["matId"] != "") {
+            for (const int &mat : obj["matId"]) {
                 int matId = obj["matId"];
-                l.push_back(new T(trans, rot, sca, mats[matId]));
-            } else {
-//            l.push_back(new T(trans, rot, sca, mats[matId]));
             }
+
+            l.push_back(new T(trans, rot, sca, mats[matId]));
 
         }
         return l;

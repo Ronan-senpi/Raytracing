@@ -51,20 +51,9 @@ Camera::CloserThan(const Point &oldImpact, const Point &newImpact) const {
     return newDistance < oldDistance;
 }
 
-Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
-//    Material m = obj->getMaterial(impact);
-//    Ray normal = obj->getNormal(impact, ray.Origin());
-//    Color c = m.Ka() * scene.getAmbiant();
-//
-//    for (int l = 0; l < scene.nbLights(); l++) {
-//        const Light *light = scene.getLight(l);
-//        Vector lv = light->getVectorToLight(impact);
-//        float alpha = lv.dot(normal.Direction());
-//        alpha = alpha < 0 ? 0 : alpha;
-//        c += light->id() * m.Kd() * alpha;
-//    }
-//    return c;
-    Material m = obj->getMaterial(impact);
+Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, int matId) {
+
+    Material m = obj->getMaterial(impact, matId);
     Ray normal = obj->getNormal(impact, ray.Origin());
     Color c = m.Ka() * scene.getAmbiant();
 
