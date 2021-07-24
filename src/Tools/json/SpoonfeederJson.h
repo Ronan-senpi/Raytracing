@@ -24,7 +24,7 @@ class SpoonfeederJson {
 public:
     SpoonfeederJson() {
         //Get json values
-        std::ifstream config_file("../resources/config-test.json", std::ifstream::binary);
+        std::ifstream config_file("../resources/config.json", std::ifstream::binary);
         json j = json::parse(config_file);
 
         //Make images
@@ -270,9 +270,10 @@ private :
                                    {1, 1, 1},
                                    {1, 1, 1}, 0.1);
                 objs.push_back(new Sphere(
-                        {0, 0, -40},
                         {0, 0, 0},
+                        {1.5708, 0, 0},
                         {20, 20, 20},
+                        "skybox",
                         skyboxMat));
             }
             ///End: Skybox

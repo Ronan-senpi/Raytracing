@@ -67,7 +67,6 @@ public:
     }
 
     Color getTexture(const Point &coordinate) const {
-
         return (*texture)(1 - coordinate[1], 1 - coordinate[0]);
     }
 };
