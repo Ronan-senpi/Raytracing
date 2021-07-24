@@ -262,7 +262,9 @@ private :
 
             ///Begin: skybox
 
-
+            Vector trans(scene["camera"]["trans"]["x"],
+                         scene["camera"]["trans"]["y"],
+                         scene["camera"]["trans"]["z"]);
             if (scene["skyId"] != "") {
                 int skyId = scene["skyId"];
                 Material skyboxMat(skybox[skyId],
@@ -270,7 +272,7 @@ private :
                                    {1, 1, 1},
                                    {1, 1, 1}, 0.1);
                 objs.push_back(new Sphere(
-                        {0, 0, 0},
+                        trans,
                         {1.5708, 0, 0},
                         {20, 20, 20},
                         "skybox",
