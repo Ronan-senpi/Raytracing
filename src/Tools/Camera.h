@@ -17,7 +17,6 @@ class Camera : public Entity {
 private:
     float focal;
     Scene scene;
-    int height;
 
     bool CloserThan(const Point &oldImpact, const Point &newImpact) const;
 
@@ -29,11 +28,9 @@ public:
     Camera(const float &foc,
            const int &h,
            Scene sce,
-
            const Point &pos,
            const Vector &rot)
             : focal(foc),
-              height(h),
               scene(std::move(sce)),
               Entity(pos, rot, {1, 1, 1}) {}
 
@@ -43,8 +40,11 @@ public:
 
     Ray getRay(float x, float y);
 
-//    void screenshot(const std::vector<Object *> &objects, const std::string &filename, int w, int h);
-    void screenshot();
+    std::string sceneName() const {
+        return scene.getName();
+    }
+
+    void screenshot(const std::string &name, const int &height, const bool &shadows);
 
     Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
 };

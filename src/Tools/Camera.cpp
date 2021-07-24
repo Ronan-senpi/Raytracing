@@ -19,7 +19,7 @@ Ray Camera::getRay(const float x, const float y) {
 
 //void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
 //                        const int w, const int h) {
-void Camera::screenshot() {
+void Camera::screenshot(const std::string &name, const int &height, const bool &shadows) {
     Image im(height, height, scene.getBackground());
 
 #pragma omp parallel for
@@ -38,14 +38,14 @@ void Camera::screenshot() {
                 }
             }
             if (nearestObj) {
-                Ray normal = nearestObj->getNormal(nearestImpact, r.Origin());
+//                Ray normal = nearestObj->getNormal(nearestImpact, r.Origin());
                 Color pixel = getImpactColor(r, nearestObj, nearestImpact);
 //                Color pixel(normal.Direction()[0], normal.Direction()[1], normal.Direction()[2]);
                 im(height - y - 1, x, pixel);
             }
         }
     }
-    im.write(scene.getName() + ".jpg");
+    im.write(name + ".jpg");
 }
 
 bool

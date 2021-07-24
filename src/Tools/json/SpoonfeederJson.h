@@ -8,13 +8,14 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <iomanip>
 
 #include "../Vector.h"
 #include "../Entity.h"
 #include "../Images/Image.h"
 #include "../Camera.h"
 #include "../Objects/Include.h"
-#include "SpoonfeederJson.h"
+#include "../Helpers/StringHelpers.h"
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -36,10 +37,81 @@ public:
         //Make scene
         std::vector<std::shared_ptr<Camera>> cameras = prepareCamera(j["scenes"], materials, skybox);
 
-        for (const auto &cam : cameras) {
-            cam->screenshot();
+        if (cameras.empty()) {
+            std::cout << "Acune scene n'a été charger verifier le fichier config.json" << std::endl;
+            return;
         }
+
+        bool shadows = false;
+        std::string tmp;
+        int sceneId;
+        int imgSize;
+        std::string imageName;
+        /// Begin : scene to renderer
+        std::cout << "ATTENTION AUCUN CONTROLE DE SAISIE N'A ETE FAIT" << std::endl;
+        std::cout << "Nous faisons confiance aux utilisateur ! <3" << std::endl;
+        std::cout << "Les scenes suivante on ete charges, la quel voulez vous rendre ? (0)" << std::endl;
+        int ind = 0;
+        for (const auto &cam : cameras) {
+            std::cout << "Id : " << ind << " : " << cam->sceneName() << std::endl;
+            ++ind;
+        }
+        getline(std::cin, tmp);
+        if (tmp.empty()) {
+            tmp = "0";
+        }
+        sceneId = StringHelper::StringToInt(tmp);
+
+        /// End : scene to renderer
+        ///Begin : Image name
+
+        std::cout << "nom de l'image :" << std::endl;
+        getline(std::cin, tmp);
+        if (tmp.empty())
+            tmp = cameras[sceneId]->sceneName();
+
+        imageName = tmp;
+
+
+        ///End : Image name
+        ///Begin : Image size
+
+        std::cout << "hauteur de l'image en pixels: (500px)" << std::endl;
+        getline(std::cin, tmp);
+        if (tmp.empty()) {
+            tmp = "500";
+        }
+        imgSize = StringHelper::StringToInt(tmp);
+
+        ///End : Image size
+
+        ///Begin : shadows
+        std::cout << "Voulez vous des ombres ? (y/n)" << std::endl;
+        getline(std::cin, tmp);
+        if (tmp.empty()) {
+            tmp = "y";
+        }
+
+        shadows = tmp == "y";
+        ///End : shadows
+
+
+        std::cout << "Debut du rendu de " << imageName << ".jpg !" << std::endl;
+        ///Begin: Renderer
+
+        std::time_t start = time(0);
+        cameras[sceneId]->screenshot(imageName, imgSize, shadows);
+        std::time_t end = time(0);
+        double seconds = difftime(end, start);
+        std::cout << std::fixed;
+        std::cout << std::setprecision(4);
+        std::cout << "Rendu de " << imageName << ".jpg fini en " << seconds << " seconds !" << std::endl;
+
+        ///End: Renderer
+
+
     }
+
 
 private :
     std::vector<std::shared_ptr<Image>> makeTextures(const json &paths) {
