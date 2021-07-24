@@ -24,7 +24,7 @@ class SpoonfeederJson {
 public:
     SpoonfeederJson() {
         //Get json values
-        std::ifstream config_file("../resources/config.json", std::ifstream::binary);
+        std::ifstream config_file("../resources/config-light.json", std::ifstream::binary);
         json j = json::parse(config_file);
 
         //Make images
@@ -45,7 +45,7 @@ public:
 
         int i = 0;
         for (auto &cam: cameras) {
-            cam->screenshot(std::to_string(i), 500, false);
+            cam->screenshot(std::to_string(i), 2000, false);
             ++i;
         }
 

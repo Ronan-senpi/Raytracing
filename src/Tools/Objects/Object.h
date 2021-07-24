@@ -37,7 +37,7 @@ public:
 
     virtual bool intersect(const Ray &ray, Point &impact) = 0;
 
-    Material getMaterial(const Point &p)const;
+    Material getMaterial(const Point &p) const;
 
     bool hasTexture(int id) const {
         return mats[id].hasTexture();
@@ -49,6 +49,10 @@ public:
 
     void material(Material m) {
         mats.push_back(m);
+    }
+
+    std::string getName() {
+        return name;
     }
 };
 

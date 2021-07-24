@@ -1,0 +1,141 @@
+{
+  "Skybox": [
+    "resources/earth.png"
+  ],
+  "Textures": [
+    "resources/tpose.jpg",
+    "resources/sen.png"
+  ],
+  "Materials": [
+    {
+      "texId": "",
+      "ka": {
+        "r": 1,
+        "g": 0,
+        "b": 0
+      },
+      "kd": {
+        "r": 1,
+        "g": 0,
+        "b": 0
+      },
+      "ks": {
+        "r": 1,
+        "g": 0,
+        "b": 0
+      },
+      "shininess": 100
+    }
+  ],
+  "scenes": [
+    {
+      "name": "scene1",
+      "skyId": 0,
+      "bgColor": {
+        "r": 0.5,
+        "g": 0.5,
+        "b": 0.5
+      },
+      "ambColor": {
+        "r": 0.1,
+        "g": 0.1,
+        "b": 0.1
+      },
+      "Objects": {
+        "cubes": [
+          {
+            "trans": {
+              "x": -1,
+              "y": 0,
+              "z": -10
+            },
+            "rot": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "sca": {
+              "x": 0.5,
+              "y": 0.5,
+              "z": 0.5
+            },
+            "matIds": [
+              0
+            ]
+          }
+        ],
+        "cylinders": [],
+        "plans": [],
+        "spheres": [
+          {
+            "trans": {
+              "x": 1,
+              "y": 0,
+              "z": -10
+            },
+            "rot": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "sca": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "matIds": [
+              0
+            ]
+          }
+          
+        ],
+        "squares": [
+          
+        ]
+      },
+      "lights": [
+        {
+          "id": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "is": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "trans": {
+            "x": -10,
+            "y": 0,
+            "z": -10
+          },
+          "rot": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "sca": {
+            "x": 1,
+            "y": 1,
+            "z": 1
+          }
+        }
+      ],
+      "camera": {
+        "trans": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "rot": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "focal": 1,
+        "height": 50
+      }
+    }
+  ]
+}

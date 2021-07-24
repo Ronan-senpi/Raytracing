@@ -4,6 +4,7 @@
 
 #include "Camera.h"
 #include <iostream>
+#include "Helpers/StringHelpers.h"
 
 Ray Camera::getRay(const float x, const float y) {
     Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
@@ -27,7 +28,7 @@ void Camera::screenshot(const std::string &name, const int &height, const bool &
             Object *nearestObj = nullptr;
             for (Object *o : scene.getObjects()) {
                 if (o->intersect(r, impact)) {
-                    if (!nearestObj || this->CloserThan(nearestImpact, impact)) {
+                    if (!nearestObj || this->CloserThan(nearestImpact, impact, this->position())) {
                         nearestObj = o;
                         nearestImpact = impact;
                     }
@@ -43,9 +44,9 @@ void Camera::screenshot(const std::string &name, const int &height, const bool &
 }
 
 bool
-Camera::CloserThan(const Point &oldImpact, const Point &newImpact) const {
-    float oldDistance = Vector(oldImpact - this->position()).norm();
-    float newDistance = Vector(newImpact - this->position()).norm();
+Camera::CloserThan(const Point &oldImpact, const Point &newImpact, const Vector &comparison) const {
+    float oldDistance = Vector(oldImpact - comparison).norm();
+    float newDistance = Vector(newImpact - comparison).norm();
     return newDistance < oldDistance;
 }
 
@@ -58,6 +59,18 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
     for (int l = 0; l < scene.nbLights(); l++) {
         const Light *light = scene.getLight(l);
         Vector lv = light->getVectorToLight(impact);
+        Vector fromlv = light->getVectorFromLight(impact);
+        Ray shadowRay(light->position(), fromlv);
+        Point impactShadow;
+        for (Object *o : scene.getObjects()) {
+            if (o != obj
+                && StringHelper::toLowerCopy(o->getName()) != "skybox" &&
+                o->intersect(shadowRay, impactShadow)) {
+                if (this->CloserThan(impact, impactShadow, light->position())) {
+                    return Color(0, 0, 0);
+                }
+            }
+        }
         float alpha = lv.dot(normal.Direction());
         if (alpha > 0)
             c += light->id() * m.Kd() * alpha;
@@ -72,6 +85,8 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact) {
         Color texColor = m.getTexture(texCoordinate);
         c = c * texColor;
     }
+
+
     return c;
 }
 

@@ -18,7 +18,7 @@ private:
     float focal;
     Scene scene;
 
-    bool CloserThan(const Point &oldImpact, const Point &newImpact) const;
+    bool CloserThan(const Point &oldImpact, const Point &newImpact, const Vector &comparison) const;
 
 public:
     Camera() = default;
