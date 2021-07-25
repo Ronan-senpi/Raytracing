@@ -18,8 +18,7 @@ private:
     float focal;
     Scene scene;
 
-
-    bool CloserThan(const Point &oldImpact, const Point &newImpact) const;
+    bool CloserThan(const Point &oldImpact, const Point &newImpact, const Vector &comparison) const;
 
 public:
 
@@ -47,9 +46,9 @@ public:
         return scene.getName();
     }
 
-    void screenshot(const std::string &name, const int &height, const bool &shadows, const int &ssaa);
+    void screenshot(const std::string &name, const int &height, const bool &displayShadows, const int &ssaa);
 
-    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
+    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact, const bool &displayShadows);
 };
 
 

@@ -1,8 +1,11 @@
 //
 // Created by rdher on 05/07/2021.
 //
+#define _USE_MATH_DEFINES
 
+#include <cmath>
 #include "Entity.h"
+
 
 void Entity::translate(const Vector transVec) {
     Matrix m;
@@ -15,8 +18,9 @@ void Entity::translate(const Vector transVec) {
 
 void Entity::rotateX(const float deg) {
     Matrix m;
-    float c = cos(deg);
-    float s = sin(deg);
+    float rad = deg * M_PI / 180;
+    float c = cos(rad);
+    float s = sin(rad);
     m(1, 1) = c;
     m(1, 2) = -s;
     m(2, 1) = s;
@@ -27,8 +31,9 @@ void Entity::rotateX(const float deg) {
 
 void Entity::rotateY(const float deg) {
     Matrix m;
-    float c = cos(deg);
-    float s = sin(deg);
+    float rad = deg * M_PI / 180;
+    float c = cos(rad);
+    float s = sin(rad);
     m(0, 0) = c;
     m(0, 2) = s;
     m(2, 0) = -s;
@@ -39,8 +44,9 @@ void Entity::rotateY(const float deg) {
 
 void Entity::rotateZ(const float deg) {
     Matrix m;
-    float c = cos(deg);
-    float s = sin(deg);
+    float rad = deg * M_PI / 180;
+    float c = cos(rad);
+    float s = sin(rad);
     m(0, 0) = c;
     m(0, 1) = -s;
     m(1, 0) = s;

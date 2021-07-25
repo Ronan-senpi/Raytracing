@@ -6,28 +6,36 @@
 #include <iostream>
 
 void StringHelper::toLower(std::string *str) {
-	for (char &c : *str) {
-		c = std::tolower(c);
-	}
+    for (char &c : *str) {
+        c = std::tolower(c);
+    }
+}
+
+std::string StringHelper::toLowerCopy(const std::string &str) {
+    std::string res;
+    for (char c : str) {
+        res += std::tolower(c);
+    }
+    return res;
 }
 
 void StringHelper::toUpper(std::string *str) {
-	for (char &c : *str) {
-		c = std::toupper(c);
-	}
+    for (char &c : *str) {
+        c = std::toupper(c);
+    }
 }
 
 int StringHelper::StringToInt(const std::string &value) {
-	try {
-		return std::stoi(value);
-	}
-	catch (std::invalid_argument const &e) {
-		std::cout << "Bad input: std::invalid_argument thrown" << std::endl;
+    try {
+        return std::stoi(value);
+    }
+    catch (std::invalid_argument const &e) {
+        std::cout << "Bad input: std::invalid_argument thrown" << std::endl;
 
-	}
-	catch (std::out_of_range const &e) {
-		std::cout << "Integer overflow: std::out_of_range thrown" << std::endl;
-	}
-	return 0;
+    }
+    catch (std::out_of_range const &e) {
+        std::cout << "Integer overflow: std::out_of_range thrown" << std::endl;
+    }
+    return 0;
 }
 

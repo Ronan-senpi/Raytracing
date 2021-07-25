@@ -55,7 +55,7 @@ public:
      * @param p "Arrivée" du vector
      * @return
      */
-//    Vector getVectorFromLight(const Point &p) const;
+    Vector getVectorFromLight(const Point &p) const;
 };
 
 

@@ -45,7 +45,8 @@ public:
         std::time_t start = time(0);
         int i = 0;
         for (auto &cam: cameras) {
-            cam->screenshot(std::to_string(i), 500, false, 8);
+            cam->screenshot(std::to_string(i), 500, true, 8);
+
             ++i;
         }
         std::time_t end = time(0);
