@@ -44,11 +44,11 @@ void Camera::screenshot(const std::string &name, const int &height, const bool &
                         }
                     }
                     if (nearestObj) {
-                        pix.addNoClamp(getImpactColor(r, nearestObj, nearestImpact,displayShadows));
+                        pix.addNoClamp(getImpactColor(r, nearestObj, nearestImpact, displayShadows));
                     }
                 }
             }
-            im(height - y - 1, x, pix /= (float) (ssaa * ssaa));
+            im(y, x, pix /= (float) (ssaa * ssaa));
             pix.clear();
 
         }
@@ -68,6 +68,7 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, c
     Ray normal = obj->getNormal(impact, ray.Origin());
     Color c = m.Ka() * scene.getAmbiant();
     bool shadowDetected = false;
+
     for (int l = 0; l < scene.nbLights(); l++) {
         const Light *light = scene.getLight(l);
         Vector lv = light->getVectorToLight(impact);
@@ -95,6 +96,7 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, c
             if (beta > 0)
                 c += light->is() * m.Ks() * pow(beta, m.Shininess());
         }
+        shadowDetected = false;
 
     }
     if (m.hasTexture()) {

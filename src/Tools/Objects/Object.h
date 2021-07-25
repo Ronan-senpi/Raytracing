@@ -33,9 +33,9 @@ public:
 
     virtual Point getTextureCoordinates(const Point &p) const = 0;
 
-    virtual Ray getNormal(const Point &p, const Point &o) = 0;
+    virtual Ray getNormal(const Point &p, const Point &o) const = 0;
 
-    virtual bool intersect(const Ray &ray, Point &impact) = 0;
+    virtual bool intersect(const Ray &ray, Point &impact) const = 0;
 
     Material getMaterial(const Point &p) const;
 
@@ -51,7 +51,7 @@ public:
         mats.push_back(m);
     }
 
-    std::string getName() {
+    std::string getName() const {
         return name;
     }
 };

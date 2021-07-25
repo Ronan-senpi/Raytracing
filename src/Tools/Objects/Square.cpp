@@ -4,7 +4,7 @@
 
 #include "Square.h"
 
-bool Square::intersect(const Ray &ray, Point &impact) {
+bool Square::intersect(const Ray &ray, Point &impact) const {
     Ray lr = globalToLocal(ray).normalized();
     if (lr.Direction()[2] < 0.0001 && lr.Direction()[2] > -0.0001)return false;
     if (lr.Direction()[2] * lr.Origin()[2] > 0)return false;

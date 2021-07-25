@@ -16,9 +16,9 @@ public:
     Cylinder(Vector trans, Vector rot, Vector sca, std::vector<Material> m) : Object(trans, rot, sca, "cube",
                                                                                      std::move(m)) {}
 
-    bool intersect(const Ray &ray, Point &impact) override;
+    bool intersect(const Ray &ray, Point &impact) const override;
 
-    Ray getNormal(const Point &p, const Point &o) override;
+    Ray getNormal(const Point &p, const Point &o) const override;
 
     Point getTextureCoordinates(const Point &p) const override { return {0, 0, 0}; }
 };
