@@ -59,14 +59,13 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, c
         const Light *light = scene.getLight(l);
         Vector lv = light->getVectorToLight(impact);
         if (displayShadows) {
-            Vector fromlv = light->getVectorFromLight(impact);
-            Ray shadowRay(light->position(), fromlv);
+            Ray shadowRay(impact, lv);
             Point impactShadow;
             for (Object *o : scene.getObjects()) {
                 if (o != obj
                     &&
-                    o->intersect(shadowRay, impactShadow) && normal.Direction().dot(fromlv) < 0) {
-                    if (this->CloserThan(impact, impactShadow, light->position())) {
+                    o->intersect(shadowRay, impactShadow) && lv.dot(normal.Direction()) < 0) {
+                    if (this->CloserThan(impactShadow, light->position(), impact)) {
                         shadowDetected = true;
                     }
 
