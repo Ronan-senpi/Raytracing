@@ -44,9 +44,9 @@ public:
         return scene.getName();
     }
 
-    void screenshot(const std::string &name, const int &height, const bool &shadows);
+    void screenshot(const std::string &name, const int &height, const bool &displayShadows);
 
-    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
+    Color getImpactColor(const Ray &ray, Object *obj, const Point &impact, const bool &displayShadows);
 };
 
 
