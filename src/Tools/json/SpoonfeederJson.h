@@ -42,19 +42,24 @@ public:
             std::cout << "Acune scene n'a été charger verifier le fichier config.json" << std::endl;
             return;
         }
-
+        std::time_t start = time(0);
         int i = 0;
         for (auto &cam: cameras) {
-            cam->screenshot(std::to_string(i), 500, false);
+            cam->screenshot(std::to_string(i), 500, false, 8);
             ++i;
         }
-
+        std::time_t end = time(0);
+        double seconds = difftime(end, start);
+        std::cout << std::fixed;
+        std::cout << std::setprecision(4);
+        std::cout << "Rendu de .jpg fini en " << seconds << " seconds !" << std::endl;
         return;
         bool shadows = false;
         std::string tmp;
         int sceneId;
         int imgSize;
         std::string imageName;
+        int ssaa;
         /// Begin : scene to renderer
         std::cout << "ATTENTION AUCUN CONTROLE DE SAISIE N'A ETE FAIT" << std::endl;
         std::cout << "Nous faisons confiance aux utilisateur ! <3" << std::endl;
@@ -103,17 +108,27 @@ public:
         shadows = tmp == "y";
         ///End : shadows
 
+        ///Begin : SSAA
+
+        std::cout << "SSAA: (1)" << std::endl;
+        getline(std::cin, tmp);
+        if (tmp.empty()) {
+            tmp = "1";
+        }
+        ssaa = StringHelper::StringToInt(tmp);
+
+        ///End : SSAA
 
         std::cout << "Debut du rendu de " << imageName << ".jpg !" << std::endl;
         ///Begin: Renderer
 
-        std::time_t start = time(0);
-        cameras[sceneId]->screenshot(imageName, imgSize, shadows);
-        std::time_t end = time(0);
-        double seconds = difftime(end, start);
-        std::cout << std::fixed;
-        std::cout << std::setprecision(4);
-        std::cout << "Rendu de " << imageName << ".jpg fini en " << seconds << " seconds !" << std::endl;
+//        std::time_t start = time(0);
+//        cameras[sceneId]->screenshot(imageName, imgSize, shadows, ssaa);
+//        std::time_t end = time(0);
+//        double seconds = difftime(end, start);
+//        std::cout << std::fixed;
+//        std::cout << std::setprecision(4);
+//        std::cout << "Rendu de " << imageName << ".jpg fini en " << seconds << " seconds !" << std::endl;
 
         ///End: Renderer
 

@@ -18,9 +18,12 @@ private:
     float focal;
     Scene scene;
 
+
     bool CloserThan(const Point &oldImpact, const Point &newImpact) const;
 
 public:
+
+
     Camera() = default;
 
     Camera(float foc, Scene s) : focal(foc), scene(std::move(s)), Entity() {}
@@ -44,7 +47,7 @@ public:
         return scene.getName();
     }
 
-    void screenshot(const std::string &name, const int &height, const bool &shadows);
+    void screenshot(const std::string &name, const int &height, const bool &shadows, const int &ssaa);
 
     Color getImpactColor(const Ray &ray, Object *obj, const Point &impact);
 };

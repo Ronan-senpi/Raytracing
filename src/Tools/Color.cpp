@@ -50,5 +50,18 @@ Color &Color::operator+=(Color c) {
     return *this;
 }
 
+void Color::addNoClamp(Color c) {
+    this->r += c[0];
+    this->g += c[1];
+    this->b += c[2];
+}
+
+Color &Color::operator/=(float f) {
+    this->r = std::clamp(r / f, 0.f, 1.0f);
+    this->g = std::clamp(g / f, 0.0f, 1.0f);
+    this->b = std::clamp(b / f, 0.0f, 1.0f);
+    return *this;
+}
+
 
 

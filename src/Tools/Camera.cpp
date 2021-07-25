@@ -6,7 +6,7 @@
 #include <iostream>
 
 Ray Camera::getRay(const float x, const float y) {
-    Ray r(-1 + 2 * x, -1 + 2 * y, 0, 0, 0, 0);
+    Ray r(x, y, 0, 0, 0, 0);
     Point foc(0, 0, focal);
     r.Direction(r.Origin() - foc);
     r = localToGlobal(r);
@@ -15,28 +15,40 @@ Ray Camera::getRay(const float x, const float y) {
 
 //void Camera::screenshot(const std::vector<Object *> &objects, const std::string &filename,
 //                        const int w, const int h) {
-void Camera::screenshot(const std::string &name, const int &height, const bool &shadows) {
+void Camera::screenshot(const std::string &name, const int &height, const bool &shadows, const int &ssaa) {
     Image im(height, height, scene.getBackground());
 
 #pragma omp parallel for
     for (int x = 0; x < height; ++x) {
         for (int y = 0; y < height; ++y) {
-            Ray r = getRay(Serializer::serialize(x, 0, height - 1), Serializer::serialize(y, 0, height - 1));
-            Point impact;
-            Point nearestImpact;
-            Object *nearestObj = nullptr;
-            for (Object *o : scene.getObjects()) {
-                if (o->intersect(r, impact)) {
-                    if (!nearestObj || this->CloserThan(nearestImpact, impact)) {
-                        nearestObj = o;
-                        nearestImpact = impact;
+
+            Color pix(0.f);
+
+            for (int subX = 0; subX < ssaa; ++subX) {
+                for (int subY = 0; subY < ssaa; ++subY) {
+                    float viewportX = ((x + ((float) subX / (float) ssaa)) / ((float) height - 1) * 2) - 1;
+                    //+ 1/(float)subX
+                    float viewportY = ((height - y + ((float) subY / (float) ssaa)) / ((float) height - 1) * 2) - 1;
+                    // + 1/(float)subY
+                    Ray r = getRay(viewportX, viewportY);
+                    Point impact;
+                    Point nearestImpact;
+                    Object *nearestObj = nullptr;
+                    for (Object *o : scene.getObjects()) {
+                        if (o->intersect(r, impact)) {
+                            if (!nearestObj || this->CloserThan(nearestImpact, impact)) {
+                                nearestObj = o;
+                                nearestImpact = impact;
+                            }
+                        }
+                    }
+                    if (nearestObj) {
+                        pix.addNoClamp(getImpactColor(r, nearestObj, nearestImpact));
                     }
                 }
             }
-            if (nearestObj) {
-                Color pixel = getImpactColor(r, nearestObj, nearestImpact);
-                im(height - y - 1, x, pixel);
-            }
+            im(height - y - 1, x, pix /= (float) (ssaa * ssaa));
+            pix.clear();
         }
     }
     im.write(name + ".jpg");

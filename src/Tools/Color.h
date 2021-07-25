@@ -26,6 +26,8 @@ public:
 
     }
 
+    Color(const float &f) : r(f), g(f), b(f) {}
+
     Color(float red, float green, float blue) {
 //        this->r = std::clamp(red, 0.0f, 1.0f);
 //        this->g = std::clamp(green, 0.0f, 1.0f);
@@ -52,6 +54,8 @@ public:
 
     Color &operator+=(Color c);
 
+    Color &operator/=(float f);
+
     void A(float val) const {
 
     }
@@ -60,6 +64,13 @@ public:
         return 1.f;
     }
 
+    void clear() {
+        r = 0.f;
+        g = 0.f;
+        b = 0.f;
+    }
+
+    void addNoClamp(Color color);
 };
 
 
