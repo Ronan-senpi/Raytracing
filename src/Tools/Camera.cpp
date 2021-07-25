@@ -76,9 +76,9 @@ Color Camera::getImpactColor(const Ray &ray, Object *obj, const Point &impact, c
             Point impactShadow;
             for (Object *o : scene.getObjects()) {
                 if (o != obj
-                    &&
-                    o->intersect(shadowRay, impactShadow) && lv.dot(normal.Direction()) < 0) {
-                    if (this->CloserThan(impactShadow, light->position(), impact)) {
+                    && obj->getName() != "skybox" &&
+                    o->intersect(shadowRay, impactShadow) && lv.dot(normal.Direction()) > 0) {
+                    if (this->CloserThan(light->position(), impactShadow, impact)) {
                         shadowDetected = true;
                     }
 
