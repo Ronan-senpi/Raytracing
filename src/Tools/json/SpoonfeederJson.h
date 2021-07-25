@@ -24,7 +24,7 @@ class SpoonfeederJson {
 public:
     SpoonfeederJson(const bool &wizard) {
         //Get json values
-        std::ifstream config_file("../resources/config.json", std::ifstream::binary);
+        std::ifstream config_file("resources/config.json", std::ifstream::binary);
         json j = json::parse(config_file);
 
         //Make images
