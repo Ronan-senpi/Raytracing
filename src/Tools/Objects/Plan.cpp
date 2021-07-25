@@ -4,7 +4,7 @@
 
 #include "Plan.h"
 
-bool Plan::intersect(const Ray &ray, Point &impact) {
+bool Plan::intersect(const Ray &ray, Point &impact) const {
     Ray lr = globalToLocal(ray);
     float vz = lr.Direction().Z();
     float oz = lr.Origin().Z();
@@ -21,7 +21,7 @@ bool Plan::intersect(const Ray &ray, Point &impact) {
     }
 }
 
-Ray Plan::getNormal(const Point &p, const Point &o) {
+Ray Plan::getNormal(const Point &p, const Point &o) const {
     Point lp = globalToLocal(p);
     Point lo = globalToLocal(o);
     float z = 1;

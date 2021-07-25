@@ -24,7 +24,7 @@ class SpoonfeederJson {
 public:
     SpoonfeederJson(const bool &wizard) {
         //Get json values
-        std::ifstream config_file("../resources/config-light.json", std::ifstream::binary);
+        std::ifstream config_file("../resources/config.json", std::ifstream::binary);
         json j = json::parse(config_file);
 
         //Make images
@@ -42,12 +42,12 @@ public:
             std::cout << "Acune scene n'a été charger verifier le fichier config.json" << std::endl;
             return;
         }
+
         if (!wizard) {
             std::time_t start = time(0);
             int i = 0;
             for (auto &cam: cameras) {
                 cam->screenshot(std::to_string(i), 500, true, 1);
-
                 ++i;
             }
             std::time_t end = time(0);

@@ -17,7 +17,7 @@ float Cube::interSide(const Ray &r, int dim, float offset) const {
     return t;
 }
 
-bool Cube::intersect(const Ray &ray, Point &impact) {
+bool Cube::intersect(const Ray &ray, Point &impact) const {
     Ray r = globalToLocal(ray).normalized();
     float mint = -1;
     float offsets[] = {-1, 1};
@@ -38,7 +38,7 @@ bool Cube::intersect(const Ray &ray, Point &impact) {
     return false;
 }
 
-Ray Cube::getNormal(const Point &p, const Point &o) {
+Ray Cube::getNormal(const Point &p, const Point &o) const {
     Point lp = globalToLocal(p);
     Point lo = globalToLocal(o);
     Vector v(0, 0, 0);
