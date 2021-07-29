@@ -23,6 +23,8 @@ using json = nlohmann::json;
 class SpoonfeederJson {
 public:
     SpoonfeederJson(const bool &wizard) {
+
+
         //Get json values
         std::ifstream config_file("resources/config.json", std::ifstream::binary);
         json j = json::parse(config_file);
@@ -37,7 +39,7 @@ public:
         //Make scene
         std::vector<std::shared_ptr<Camera>> cameras = prepareCamera(j["scenes"], materials, skybox);
 
-
+        displayTitle();
         if (cameras.empty()) {
             std::cout << "Acune scene n'a été charger verifier le fichier config.json" << std::endl;
             return;
@@ -158,6 +160,8 @@ private :
     static std::vector<std::shared_ptr<Camera>> prepareCamera(const json &scenes,
                                                               const std::vector<Material> &mats,
                                                               const std::vector<std::shared_ptr<Image>> &skybox);
+
+    static void displayTitle();
 };
 
 #endif //RAYTRACING_SPOONFEEDERJSON_H

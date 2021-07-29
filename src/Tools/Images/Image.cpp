@@ -72,7 +72,7 @@ ImageType Image::getImageType(const std::string &filename) {
 }
 
 Color Image::operator()(const int &x, const int &y) const {
-    Color pixel;
+    Color pixel(0.75);
     if (channel == 1) {
         pixel[0] = Serializer::serialize(data[(x * 1 * width) + (y * 1)], 0, 255);
     } else if (channel == 2) {
