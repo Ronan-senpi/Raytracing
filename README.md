@@ -1,5 +1,5 @@
 # Raytracing
-
+For SMID look in file : `./src/Tools/Objects/Sphere.cpp`
 ## Features v1.0
 
 ### Choosable parameters with commands
